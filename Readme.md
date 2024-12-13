@@ -23,7 +23,7 @@ We welcome your contributions. Please follow the below guidelines while contribu
 1. Fork and star⭐ the repository and clone locally.
 2. Create an upstream remote and sync your local copy before your branch. See detailed instructions [here](https://help.github.com/articles/syncing-a-fork)
 3. Do the work and commit changes with good commit messages.
-4. Once you are confident in your work, create a pull request to the `master` branch of the upstream repository with proper descriptions explaining what you did and wait until we review it😊.
+4. Once you are confident in your work, create a pull request to the `main` branch of the upstream repository with proper descriptions explaining what you did and wait until we review it😊.
 
 > Check out [GitHub Flow](https://guides.github.com/introduction/flow/) for more details.
 
@@ -43,7 +43,7 @@ We welcome your contributions. Please follow the below guidelines while contribu
 ## 🗒️Guidlines
 Please help us follow the best practice to make it easy for the reviewer as well as the contributor. We want to focus on the code quality more than on managing pull request ethics.
 
-- Reference the issue numbers in the commit message if it resolves an open issue. Follow the pattern given in [PR_TEMPLATE.md](https://github.com/opencodeiiita/GeekHaven-Community-App/blob/master/PR_TEMPLATE.md)
+- Reference the issue numbers in the commit message if it resolves an open issue. Follow the pattern given in [PR_TEMPLATE.md](https://github.com/opencodeiiita/Huddle/blob/main/PR_TEMPLATE.md)
 
 - Provide the relevant screenshot for easier review.
 
