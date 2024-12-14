@@ -1,9 +1,9 @@
 # Huddle App
-**To create a one-stop app for all the management tasks of GeekHaven.**</p>
+**To create a one-stop app for all the management tasks.**</p>
 
 
 ## 🚀What issue does this App address?
-This app would be a one-stop solution for all management tasks of GeekHaven. The app will include a comprehensive space where teams can discuss their ideas, display the current running projects of different wings for better collaboration.
+This app would be a one-stop solution for all management tasks. The app will include a comprehensive space where teams can discuss their ideas, display the current running projects of different wings for better collaboration.
 
 ## 🧷Getting Started
 - [Setup Git](https://git-scm.com/downloads)
