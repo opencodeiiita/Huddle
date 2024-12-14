@@ -12,6 +12,15 @@ This app would be a one-stop solution for all management tasks. The app will inc
 ##  ✒Tech Stack
 * Kotlin
 
+##  🌟 Design of the APP
+- [The Design which would be Followed.](https://www.figma.com/design/OqXafqRl7BxXkqvYACeSmw/Huddle-App?node-id=0-1&t=RLGpPWryKiLk59VR-1)
+
+
+##  🧑‍🏫 Mentors
+This project is proudly mentored and guided by:
+- **Grish**
+- **Naitik**
+
 
 ## Claim an issue
 Comment on the issue. In case of no activity on the issue even after 2 days, the issue will be reassigned. If you have difficulty approaching the issue, feel free to ask on our discord channel.
