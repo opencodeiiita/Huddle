@@ -17,7 +17,7 @@ This app would be a one-stop solution for all management tasks. The app will inc
 
 
 ##  🧑‍🏫 Mentors
-This project is proudly mentored and guided by:
+This project is mentored and guided by:
 - **Grish**
 - **Naitik**
 
