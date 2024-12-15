@@ -1,4 +1,4 @@
-package com.example.huddle
+package com.example.huddle.activities
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
