@@ -12,6 +12,10 @@
     An example is provided for your reference.-->
 <resources>
     <item name="participant" type="string">
+<participant>
+            <name>Holly Yen</name>
+            <github_id>hollyyen</github_id>
+        </participant>
 
 
     </item>
