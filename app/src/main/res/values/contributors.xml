@@ -26,8 +26,10 @@
             <name>Priyam Chakrabarty</name>
             <github_id>PriyamJChakrabarty</github_id>
         </participant>
-
-
+        <participant>
+            <name>Aryan Srivastava</name>
+            <github_id>Aryan9059</github_id>
+        </participant>
         <participant>
             <name>Kartik Sharma</name>
             <github_id>kartiksharma1227</github_id>
@@ -114,6 +116,15 @@
         <participant>
             <name>Shwet Kumar</name>
             <github_id>Oopshwet</github_id>
+         </participant>
+         <participant>
+            <name>Aryan Srivastava</name>
+            <github_id>Aryan9059</github_id>
+        </participant>
+        <participant>
+            <name>Debmallya Bhandari</name>
+            <github_id>Debmallya-03</github_id>
+
         </participant>
     </item>
 </resources>
