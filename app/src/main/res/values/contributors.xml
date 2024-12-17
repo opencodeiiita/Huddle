@@ -13,6 +13,11 @@
 <resources>
     <item name="participant" type="string">
         <participant>
+            <name>Sudhanshu</name>
+            <github_id>sahsudhanshu</github_id>
+        </participant>
+        
+        <participant>
             <name>Holly Yen</name>
             <github_id>hollyyen</github_id>
         </participant>
