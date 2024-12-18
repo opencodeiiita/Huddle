@@ -1,17 +1,11 @@
-package com.example.huddle.activities
+package com.example.huddle.components.forgotPassword
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.huddle.R
-import com.example.huddle.fragments.ForgotPasswordFragment
-import com.google.android.material.button.MaterialButton
+import com.example.huddle.components.forgotPassword.ForgotPasswordFragment
 
 class ForgotPasswordActivity : AppCompatActivity() {
 
@@ -32,7 +26,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 R.anim.slide_in_left,
                 R.anim.slide_out_right
             )
-            .replace(R.id.fragment_container, fragment)
+            .replace(R.id.forgot_password_fragment_container, fragment)
             .addToBackStack(null)
             .commit()
     }

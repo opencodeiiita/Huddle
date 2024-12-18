@@ -4,11 +4,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".components.forgotPassword.ForgotPasswordActivity">
+    tools:context=".components.login.LoginActivity">
 
     <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/forgot_password_fragment_container"/>
+        android:id="@+id/login_fragment_container"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
