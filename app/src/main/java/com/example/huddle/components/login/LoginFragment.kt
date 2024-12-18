@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.huddle.R
-import com.example.huddle.components.forgotPassword.CheckEmailFragment
 import com.example.huddle.components.forgotPassword.ForgotPasswordActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
