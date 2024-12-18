@@ -1,4 +1,4 @@
-package com.example.huddle.fragments
+package com.example.huddle.components.forgotPassword
 
 import android.os.Bundle
 import android.text.Editable
@@ -48,7 +48,7 @@ class CheckEmailFragment : Fragment() {
                     R.anim.slide_out_right
                 )
             //Logic for VERIFY CODE Button
-            fr?.replace(R.id.fragment_container, SetPasswordFragment())
+            fr?.replace(R.id.forgot_password_fragment_container, SetPasswordFragment())
                 ?.addToBackStack(null)
             fr?.commit()
         }
