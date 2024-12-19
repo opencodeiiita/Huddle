@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.huddle.MainActivity
 import com.example.huddle.R
+import com.example.huddle.activities.BaseHomeActivity
 import com.example.huddle.components.forgotPassword.ForgotPasswordActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -30,8 +32,12 @@ class LoginFragment : Fragment() {
             }
 
         view.findViewById<MaterialButton>(R.id.sign_in_btn)?.setOnClickListener {
-            //Logic for SIGN IN Button
+            // Logic for SIGN IN Button
+            val context = requireContext()
+            val intent = Intent(context, BaseHomeActivity::class.java)
+            activity?.startActivity(intent)
         }
+
 
         view.findViewById<TextView>(R.id.forgot_password_tv)
             ?.setOnClickListener {
