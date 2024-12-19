@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <!--
+    Hello contributors!!!
+    This file contains the list of all the Participants who participated in contributing to Huddle-App
+    Add your name in this file in the following format-
+        <participant>
+            <name>Paras Pandey</name>
+            <github_id>Paraspandey-debugs</github_id>
+        </participant>
+    all the participants information must be inside the participant item.
+    An example is provided for your reference.-->
+<resources>
+    <item name="participant" type="string">
+        <participant>
+            <name>Sudhanshu</name>
+            <github_id>sahsudhanshu</github_id>
+        </participant>
+        
+        <participant>
+            <name>Holly Yen</name>
+            <github_id>hollyyen</github_id>
+        </participant>
+
+        <participant>
+            <name>Swarup Narkhede</name>
+            <github_id>swarupn17</github_id>
+        </participant>
+
+        <participant>
+            <name>Priyam Chakrabarty</name>
+            <github_id>PriyamJChakrabarty</github_id>
+        </participant>
+        <participant>
+            <name>Aryan Srivastava</name>
+            <github_id>Aryan9059</github_id>
+        </participant>
+        <participant>
+            <name>Kartik Sharma</name>
+            <github_id>kartiksharma1227</github_id>
+         </participant>
+
+         <participant>
+            <name>Nitya Bhavsar</name>
+            <github_id>NityaB25</github_id>
+         </participant>
+
+        <participant>
+            <name>Ashish Saraswat</name>
+            <github_id>Asheeesh9</github_id>
+
+        </participant>
+
+        <participant>
+        <name>Snehal Gupta</name>
+        <github_id>Snehalgupta-07</github_id>
+
+        </participant>
+        <participant>
+            <name>Ishita Agrawal</name>
+            <github_id>Ishu0112</github_id>
+      </participant>
+       <participant>
+            <name> Anusa Saha </name>
+            <github_id> anusa-saha </github_id>
+      </participant>
+       <participant>
+            <name> Ayushi Songara </name>
+            <github_id> aashi-336 </github_id>
+      </participant>
+       <participant>
+            <name> Hemant </name>
+            <github_id> bcde123 </github_id>
+        </participant>
+       <participant>
+            <name> Kartiki Raghuwanshi</name>
+            <github_id> Butterfly222-kartiki </github_id>
+      </participant>
+       <participant>
+            <name> Kanav Agrawal </name>
+            <github_id> HGRgamer </github_id>
+      </participant>
+
+      <participant>
+            <name> Asim Kalim </name>
+            <github_id> kalim-Asim </github_id>
+      </participant>
+      <participant>
+            <name> Aditya Aggarwal </name>
+            <github_id> adityaagg4689 </github_id>
+      </participant>
+      <participant>
+            <name> Dhruv Goyal </name>
+            <github_id> dhruvgoyal-098 </github_id>
+      </participant>
+        <participant>
+                <name>Abdul Azeem Ansari</name>
+                <github_id>23abdul23</github_id>
+            </participant>
+
+        <participant>
+                <name>Samandeep Singh Sidhu</name>
+                <github_id>Darkknight0125</github_id>
+        </participant>
+        <participant>
+                <name>Ritesh Narayan Das</name>
+                <github_id>rndastech</github_id>
+        </participant>
+        <participant>
+                <name>Krishna Mohan</name>
+                <github_id>krishnamohan2006</github_id>
+        </participant>
+        <participant>
+                <name>Sarvesh Kumar</name>
+                <github_id>Sarvesh0955</github_id>
+        </participant>
+        <participant>
+            <name>Aryan Srivastava</name>
+            <github_id>Aryan9059</github_id>
+        </participant>
+        <participant>
+            <name>Shwet Kumar</name>
+            <github_id>Oopshwet</github_id>
+         </participant>
+         <participant>
+            <name>Aryan Srivastava</name>
+            <github_id>Aryan9059</github_id>
+        </participant>
+        <participant>
+            <name>Debmallya Bhandari</name>
+            <github_id>Debmallya-03</github_id>
+
+        </participant>
+        <participant>
+            <name>Rajdeep Paul</name>
+            <github_id>rajdeep13-coder</github_id>
+        </participant> 
+        <participant>
+            <name>Atharwa Zawar</name>
+            <github_id>Atharwa23</github_id>
+        </participant>
+        <participant>
+            <name>Vinayak Maheshwari</name>
+            <github_id>07CalC</github_id>
+           </participant>
+           <participant>
+            <name>Apoorv Mittal</name>
+            <github_id>Apoorv012</github_id>
+        </participant>
+        <participant>
+            <name>Manish Mote</name>
+            <github_id>Heisenberg503</github_id>
+        </participant>
+        <participant>
+            <name>Puravi Mohta</name>
+            <github_id>puravimohta15</github_id>
+        </participant>
+        <participant>
+            <name>Pratham Jain</name>
+            <github_id>PrathamJain2601</github_id>
+        </participant>
+    </item>
+</resources>
