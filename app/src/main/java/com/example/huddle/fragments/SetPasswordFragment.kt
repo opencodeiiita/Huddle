@@ -1,4 +1,4 @@
-package com.example.huddle.components.forgotPassword
+package com.example.huddle.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

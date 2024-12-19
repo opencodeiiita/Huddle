@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/bottom_sheet"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,18 +9,20 @@
     android:orientation="vertical"
     android:paddingTop="10dp"
     android:paddingHorizontal="25dp">
+
     <View
         android:id="@+id/view"
         android:layout_width="40dp"
         android:layout_height="4dp"
+        android:layout_marginTop="8dp"
         android:layout_gravity="center"
-        android:background="#373c4e"/>
+        android:background="@color/stroke"/>
 
     <RelativeLayout
         android:id="@+id/relativeLayoutCreateTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/outlined_search_box"
         android:padding="20dp">
 
@@ -28,7 +31,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
             android:src="@drawable/edit_square" />
 
         <TextView
@@ -47,7 +49,7 @@
         android:id="@+id/relativeLayoutCreateProject"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/outlined_search_box"
         android:padding="20dp">
 
@@ -56,7 +58,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
             android:src="@drawable/plus_button" />
 
         <TextView
@@ -75,7 +76,7 @@
         android:id="@+id/relativeLayoutCreateTeam"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/outlined_search_box"
         android:padding="20dp">
 
@@ -84,7 +85,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
             android:src="@drawable/three_users" />
 
         <TextView
@@ -103,7 +103,7 @@
         android:id="@+id/relativeLayoutCreateEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/outlined_search_box"
         android:padding="20dp">
 
@@ -112,7 +112,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
             android:src="@drawable/time_circle" />
 
         <TextView
@@ -127,11 +126,29 @@
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <ImageView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/imageViewClose"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/cross_circle"
-        android:layout_gravity="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom|center"
+        app:cardBackgroundColor="@color/accent"
+        app:cardCornerRadius="27dp"
+        android:layout_marginVertical="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/bottom_navigation"
+        app:strokeColor="@color/accent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:padding="8dp"
+            android:src="@drawable/baseline_close_24"
+            app:tint="@color/text_main"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </LinearLayout>
