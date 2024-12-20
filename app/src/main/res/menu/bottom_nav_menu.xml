@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_item1"
-        android:icon="@drawable/home_svgrepo_com"
+        android:icon="@drawable/bottom_home"
         android:title="Home" />
 
     <item
         android:id="@+id/navigation_item2"
-        android:icon="@drawable/folder_svgrepo_com"
+        android:icon="@drawable/bottom_folder"
         android:title="Project" />
 
     <item
@@ -17,12 +17,12 @@
 
     <item
         android:id="@+id/navigation_item3"
-        android:icon="@drawable/message_circle_dots_svgrepo_com"
+        android:icon="@drawable/bottom_chats"
         android:title="Community" />
 
     <item
         android:id="@+id/navigation_item4"
-        android:icon="@drawable/profile_svgrepo_com"
+        android:icon="@drawable/bottom_person"
         android:title="Profile" />
 
 </menu>
