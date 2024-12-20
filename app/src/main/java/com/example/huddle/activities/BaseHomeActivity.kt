@@ -6,16 +6,19 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.huddle.R
+import com.example.huddle.dialogs.AddTaskDialog
 import com.example.huddle.fragments.CommunityFragment
 import com.example.huddle.fragments.HomeFragment
 import com.example.huddle.fragments.ProfileFragment
 import com.example.huddle.fragments.ProjectFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.card.MaterialCardView
 
 class BaseHomeActivity : AppCompatActivity() {
 
@@ -26,10 +29,10 @@ class BaseHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_base_home)
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
-        val addButton: ImageButton = findViewById(R.id.AddButton)
+        val addButton: MaterialCardView = findViewById(R.id.AddButton)
 
         // Load the default fragment on app start
         loadFragment(fragment1)
@@ -76,8 +79,14 @@ class BaseHomeActivity : AppCompatActivity() {
         dialog.setContentView(R.layout.bottom_sheet_layout)
 
         // Close button in bottom sheet
-        val closeButton: ImageView = dialog.findViewById(R.id.imageViewClose)
+        val closeButton: MaterialCardView = dialog.findViewById(R.id.imageViewClose)
         closeButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<RelativeLayout?>(R.id.relativeLayoutCreateTask).setOnClickListener {
+            val addTaskDialog: DialogFragment = AddTaskDialog()
+            addTaskDialog.show(supportFragmentManager, "AddTaskDialog")
             dialog.dismiss()
         }
 

@@ -14,7 +14,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".components.login.LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -26,7 +26,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".components.forgotPassword.ForgotPasswordActivity"
+            android:name=".activities.ForgotPasswordActivity"
             android:exported="false" />
 
         <activity
