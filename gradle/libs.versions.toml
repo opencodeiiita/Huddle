@@ -13,6 +13,8 @@ appcompat = "1.7.0"
 material = "1.12.0"
 activity = "1.9.3"
 constraintlayout = "2.2.0"
+xcircleimageview = " 3.1.0"
+xcircleimageviewVersion = " 3.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -34,6 +36,8 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+xcircleimageview = { module = "de.hdodenhof: circleimageview", version.ref = "xcircleimageview" }
+xcircleimageview-v310 = { module = "de.hdodenhof: circleimageview", version.ref = "xcircleimageviewVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
