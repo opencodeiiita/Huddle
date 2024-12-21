@@ -59,11 +59,6 @@ class LoginFragment : Fragment() {
 
         progressDialog = dialogBuilder.create()
 
-        view.findViewById<MaterialCardView>(R.id.fragment_login_back)
-            ?.setOnClickListener {
-                activity?.finish()
-            }
-
         val email_edt = view.findViewById<TextInputEditText>(R.id.sign_in_email_edt)
         val password_edt = view.findViewById<TextInputEditText>(R.id.sign_in_password_edt)
 

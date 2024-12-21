@@ -120,6 +120,7 @@
                     app:placeholderTextColor="@color/accent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sign_up_name_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textCapWords"
@@ -147,6 +148,7 @@
                     app:placeholderTextColor="@color/accent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sign_up_email_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
@@ -176,6 +178,7 @@
                     app:placeholderTextColor="@color/accent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/sign_up_password_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -235,7 +238,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/login_apple_card"
+                        android:id="@+id/signup_github_card"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="20dp"
@@ -250,12 +253,12 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="14dp"
-                            android:src="@drawable/apple_logo"
-                            app:tint="@color/text_main" />
+                            app:tint="@color/text_main"
+                            android:src="@drawable/github_icon" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/login_google_card"
+                        android:id="@+id/signup_google_card"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="20dp"

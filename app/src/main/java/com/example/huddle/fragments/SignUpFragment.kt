@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION", "DEPRECATION", "DEPRECATION")
-
 package com.example.huddle.fragments
 
 import android.app.Activity

@@ -9,10 +9,18 @@
     tools:context=".activities.BaseHomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:fabCradleMargin="20dp">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/AddButton"
@@ -39,6 +47,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:background="@drawable/bottom_nav_gradient"

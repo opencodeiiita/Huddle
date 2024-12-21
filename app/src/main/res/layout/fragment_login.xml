@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    tools:context=".fragments.LoginFragment"
     android:background="@color/background"
     android:layout_height="match_parent">
 
@@ -29,30 +30,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/fragment_login_back"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="20dp"
-                app:cardBackgroundColor="@color/background"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="12dp"
-                    android:src="@drawable/baseline_arrow_back_ios_new_24"
-                    app:tint="@color/text_main" />
-            </com.google.android.material.card.MaterialCardView>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sign In"
+                android:layout_margin="20dp"
                 android:textColor="@color/text_main"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -101,7 +83,6 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/emaillog_parent"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
