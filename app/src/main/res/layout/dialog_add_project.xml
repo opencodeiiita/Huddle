@@ -291,6 +291,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:hint="Description"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
@@ -303,11 +304,9 @@
                 app:placeholderTextColor="@color/accent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/date_edt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="text"
+                    android:inputType="textCapSentences"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_sec" />
 

@@ -41,30 +41,30 @@ class AddProjectDialog : DialogFragment() {
             dialog?.dismiss()
         }
 
-        val date_edt = view.findViewById<TextInputEditText>(R.id.date_edt)
-        date_edt.setOnClickListener {
-            val dialogs: MaterialDatePicker<*> =
-                MaterialDatePicker.Builder.datePicker().setTitleText("Select Date").build()
-            dialogs.show(requireActivity().supportFragmentManager, "tag")
-            dialogs.addOnPositiveButtonClickListener { selection ->
-                @SuppressLint("SimpleDateFormat") val format =
-                    SimpleDateFormat("dd/MM/yyyy")
-                val calendar = Calendar.getInstance(TimeZone.getDefault())
-                calendar.timeInMillis = selection.toString().toLong()
-                var myDate = format.format(calendar.time)
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    val formatter =
-                        DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss")
-                    myDate = myDate.replace("/", "-") + "T00:00:00"
-                    val dateTime = LocalDateTime.parse(myDate, formatter)
-                    val formatter1 =
-                        DateTimeFormatter.ofPattern("MMMM d, yyyy")
-                    date_edt.setText(dateTime.format(formatter1))
-                } else {
-                    date_edt.setText(myDate)
-                }
-            }
-        }
+//        val date_edt = view.findViewById<TextInputEditText>(R.id.date_edt)
+//        date_edt.setOnClickListener {
+//            val dialogs: MaterialDatePicker<*> =
+//                MaterialDatePicker.Builder.datePicker().setTitleText("Select Date").build()
+//            dialogs.show(requireActivity().supportFragmentManager, "tag")
+//            dialogs.addOnPositiveButtonClickListener { selection ->
+//                @SuppressLint("SimpleDateFormat") val format =
+//                    SimpleDateFormat("dd/MM/yyyy")
+//                val calendar = Calendar.getInstance(TimeZone.getDefault())
+//                calendar.timeInMillis = selection.toString().toLong()
+//                var myDate = format.format(calendar.time)
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+//                    val formatter =
+//                        DateTimeFormatter.ofPattern("dd-MM-yyyy'T'HH:mm:ss")
+//                    myDate = myDate.replace("/", "-") + "T00:00:00"
+//                    val dateTime = LocalDateTime.parse(myDate, formatter)
+//                    val formatter1 =
+//                        DateTimeFormatter.ofPattern("MMMM d, yyyy")
+//                    date_edt.setText(dateTime.format(formatter1))
+//                } else {
+//                    date_edt.setText(myDate)
+//                }
+//            }
+//        }
 
         val start_time_edt = view.findViewById<TextInputEditText>(R.id.start_time_edt)
         start_time_edt.setOnClickListener {
