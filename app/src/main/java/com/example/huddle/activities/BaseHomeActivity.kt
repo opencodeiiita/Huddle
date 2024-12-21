@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.huddle.R
+import com.example.huddle.dialogs.AddProjectDialog
 import com.example.huddle.dialogs.AddTaskDialog
 import com.example.huddle.dialogs.AddTeamDialog
 import com.example.huddle.fragments.CommunityFragment
@@ -94,6 +95,12 @@ class BaseHomeActivity : AppCompatActivity() {
         dialog.findViewById<RelativeLayout?>(R.id.relativeLayoutCreateTeam).setOnClickListener {
             val addTaskDialog: DialogFragment = AddTeamDialog()
             addTaskDialog.show(supportFragmentManager, "AddTeamDialog")
+            dialog.dismiss()
+        }
+
+        dialog.findViewById<RelativeLayout?>(R.id.relativeLayoutCreateProject)?.setOnClickListener {
+            val addProjectDialog: DialogFragment = AddProjectDialog()
+            addProjectDialog.show(supportFragmentManager, "AddProjectDialog")
             dialog.dismiss()
         }
 

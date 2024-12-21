@@ -120,7 +120,7 @@
                     app:placeholderTextColor="@color/accent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/emaillog"
+                        android:id="@+id/sign_in_email_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
@@ -150,7 +150,7 @@
                     app:placeholderTextColor="@color/accent">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/confirm_pass_tv"
+                        android:id="@+id/sign_in_password_edt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
@@ -221,7 +221,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/login_apple_card"
+                        android:id="@+id/login_github_card"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="20dp"
@@ -236,8 +236,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:padding="14dp"
-                            android:src="@drawable/apple_logo"
-                            app:tint="@color/text_main" />
+                            app:tint="@color/text_main"
+                            android:src="@drawable/github_icon" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <com.google.android.material.card.MaterialCardView
