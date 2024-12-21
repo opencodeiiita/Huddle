@@ -165,7 +165,7 @@
         <!-- My Projects Button -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_stroke"
             android:gravity="center_vertical"
@@ -189,7 +189,7 @@
         <!-- Join Team Button -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_stroke"
             android:gravity="center_vertical"
@@ -213,7 +213,7 @@
         <!-- Settings Button -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_stroke"
             android:gravity="center_vertical"
@@ -237,7 +237,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/button_stroke"
             android:gravity="center_vertical"
