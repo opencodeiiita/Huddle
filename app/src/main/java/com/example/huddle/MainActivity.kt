@@ -5,7 +5,11 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.huddle.activities.BaseHomeActivity
 import com.example.huddle.activities.LoginActivity
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,8 +21,11 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        //Currently jumping to Login Activity.
-        startActivity(Intent(this, LoginActivity::class.java))
+        val currentUser = FirebaseAuth.getInstance().currentUser
+
+        if (currentUser != null) startActivity(Intent(this, BaseHomeActivity::class.java))
+        else startActivity(Intent(this, LoginActivity::class.java))
+
         finish()
     }
 }

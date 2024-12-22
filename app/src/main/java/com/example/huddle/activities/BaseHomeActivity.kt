@@ -23,11 +23,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
 class BaseHomeActivity : AppCompatActivity() {
-
-    private val fragment1 = HomeFragment()
-    private val fragment2 = ProjectFragment()
-    private val fragment3 = CommunityFragment()
-    private val fragment4 = ProfileFragment()
+    private var previousItemId: Int = R.id.navigation_item1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,51 +32,44 @@ class BaseHomeActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val addButton: MaterialCardView = findViewById(R.id.AddButton)
 
-        // Load the default fragment on app start
-        loadFragment(fragment1)
+        loadFragment(HomeFragment(), true)
 
-        // Set up bottom navigation listener (Updated method)
         bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_item1 -> {
-                    loadFragment(fragment1)
-                    true
-                }
-                R.id.navigation_item2 -> {
-                    loadFragment(fragment2)
-                    true
-                }
-                R.id.navigation_item3 -> {
-                    loadFragment(fragment3)
-                    true
-                }
-                R.id.navigation_item4 -> {
-                    loadFragment(fragment4)
-                    true
-                }
-                else -> false
+            val newFragment = when (item.itemId) {
+                R.id.navigation_item1 -> HomeFragment()
+                R.id.navigation_item2 -> ProjectFragment()
+                R.id.navigation_item3 -> CommunityFragment()
+                R.id.navigation_item4 -> ProfileFragment()
+                else -> HomeFragment()
             }
+
+            val isForward = item.itemId > previousItemId
+            loadFragment(newFragment, isForward)
+
+            previousItemId = item.itemId
+            true
+
         }
 
-        // Show bottom sheet on AddButton click
         addButton.setOnClickListener {
             showBottomSheet()
         }
     }
 
-    // Function to load a fragment
-    private fun loadFragment(fragment: Fragment) {
+    private fun loadFragment(fragment: Fragment, isForward: Boolean) {
         supportFragmentManager.beginTransaction()
+        .setCustomAnimations(
+            if (isForward) R.anim.slide_in_right else R.anim.slide_in_left,
+            if (isForward) R.anim.slide_out_left else R.anim.slide_out_right
+        )
             .replace(R.id.nav_host_fragment, fragment)
             .commit()
     }
 
-    // Function to show the bottom sheet
     private fun showBottomSheet() {
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.bottom_sheet_layout)
 
-        // Close button in bottom sheet
         val closeButton: MaterialCardView = dialog.findViewById(R.id.imageViewClose)
         closeButton.setOnClickListener {
             dialog.dismiss()
@@ -106,7 +95,6 @@ class BaseHomeActivity : AppCompatActivity() {
 
         dialog.show()
 
-        // Configure dialog properties
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
