@@ -9,10 +9,18 @@
     tools:context=".activities.BaseHomeActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/nav_host_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:fabCradleMargin="20dp">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/AddButton"
@@ -38,12 +46,23 @@
 
         </com.google.android.material.card.MaterialCardView>
 
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:background="@drawable/bottom_nav_gradient"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             style="@style/Widget.App.BottomNavigationView"
             android:layout_width="match_parent"
             android:layout_height="72dp"
             android:layout_gravity="bottom"
+            app:itemBackground="@color/background"
             app:itemIconTint="@drawable/bottom_nav_selector"
             app:itemTextColor="@drawable/bottom_nav_selector"
             app:labelVisibilityMode="unlabeled"
