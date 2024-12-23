@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Project"
+            android:text="Create Project"
             android:textColor="@color/text_main"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -90,7 +90,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginEnd="40dp"
                 android:text="Team Member"
                 android:textColor="@color/text_sec"
                 android:textSize="16sp" />
@@ -227,8 +226,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginStart="5dp">
+                    android:orientation="horizontal">
 
                     <Space
                         android:layout_width="20dp"
@@ -238,25 +236,25 @@
                     <View
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/label_pink" />
 
                     <View
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/label_yellow" />
 
                     <View
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/label_blue" />
 
                     <View
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginEnd="8dp"
+                        android:layout_marginEnd="16dp"
                         android:background="@drawable/label_red" />
 
                     <!-- Add Label Button -->
@@ -290,8 +288,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:hint="Description"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="32dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
@@ -318,8 +315,8 @@
                 android:layout_width="240dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_height="60dp"
-                android:layout_marginTop="16dp"
-                android:text="Save"
+                android:layout_marginTop="32dp"
+                android:text="Create"
                 android:textColor="@color/text_main"
                 android:textSize="18sp"
                 app:cornerRadius="16dp" />

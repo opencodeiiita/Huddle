@@ -6,7 +6,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Gravity
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.RelativeLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -23,32 +22,38 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
 class BaseHomeActivity : AppCompatActivity() {
+    private lateinit var currentFragment: Fragment
     private var previousItemId: Int = R.id.navigation_item1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_home)
 
+
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val addButton: MaterialCardView = findViewById(R.id.AddButton)
 
-        loadFragment(HomeFragment(), true)
+        currentFragment = HomeFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.nav_host_fragment, currentFragment!!, "HOME")
+            .commit()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
+            if (item.itemId == previousItemId) return@setOnItemSelectedListener false
+
             val newFragment = when (item.itemId) {
-                R.id.navigation_item1 -> HomeFragment()
-                R.id.navigation_item2 -> ProjectFragment()
-                R.id.navigation_item3 -> CommunityFragment()
-                R.id.navigation_item4 -> ProfileFragment()
-                else -> HomeFragment()
+                R.id.navigation_item1 -> getOrCreateFragment("HOME", HomeFragment())
+                R.id.navigation_item2 -> getOrCreateFragment("PROJECT", ProjectFragment())
+                R.id.navigation_item3 -> getOrCreateFragment("COMMUNITY", CommunityFragment())
+                R.id.navigation_item4 -> getOrCreateFragment("PROFILE", ProfileFragment())
+                else -> currentFragment
             }
 
             val isForward = item.itemId > previousItemId
-            loadFragment(newFragment, isForward)
+            switchFragment(newFragment, isForward)
 
             previousItemId = item.itemId
             true
-
         }
 
         addButton.setOnClickListener {
@@ -56,14 +61,31 @@ class BaseHomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun loadFragment(fragment: Fragment, isForward: Boolean) {
-        supportFragmentManager.beginTransaction()
-        .setCustomAnimations(
-            if (isForward) R.anim.slide_in_right else R.anim.slide_in_left,
-            if (isForward) R.anim.slide_out_left else R.anim.slide_out_right
-        )
-            .replace(R.id.nav_host_fragment, fragment)
-            .commit()
+    private fun getOrCreateFragment(tag: String, fragment: Fragment): Fragment {
+        val fragmentManager = supportFragmentManager
+        return fragmentManager.findFragmentByTag(tag) ?: fragment
+    }
+
+    private fun switchFragment(fragment: Fragment, isForward: Boolean) {
+        if (currentFragment != fragment) {
+            val transaction = supportFragmentManager.beginTransaction()
+
+            transaction.setCustomAnimations(
+                if (isForward) R.anim.slide_in_right else R.anim.slide_in_left,
+                if (isForward) R.anim.slide_out_left else R.anim.slide_out_right
+            )
+
+            currentFragment?.let { transaction.hide(it) }
+
+            if (fragment.isAdded) {
+                transaction.show(fragment)
+            } else {
+                transaction.add(R.id.nav_host_fragment, fragment, fragment.javaClass.simpleName)
+            }
+
+            transaction.commit()
+            currentFragment = fragment
+        }
     }
 
     private fun showBottomSheet() {

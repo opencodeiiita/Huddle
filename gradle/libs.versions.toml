@@ -1,5 +1,8 @@
 [versions]
 agp = "8.7.1"
+blurLayout = "1.1.1"
+blurrylayout = "2.0.0"
+blurview = "1.6.6"
 coreSplashscreen = "1.0.1"
 glide = "4.15.1"
 kotlin = "2.0.0"
@@ -20,10 +23,16 @@ firebaseFirestore = "25.1.1"
 firebaseDatabase = "21.0.0"
 firebaseAuth = "23.1.0"
 playServicesAuth = "21.3.0"
+renderscriptApi = "1.0.0"
+shimmer = "0.5.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
+androidx-renderscript-api = { module = "androidx.renderscript:renderscript-api", version.ref = "renderscriptApi" }
+blur-layout = { module = "com.avito.android:blur-layout", version.ref = "blurLayout" }
+blurrylayout = { module = "com.revosleap.layout:blurrylayout", version.ref = "blurrylayout" }
+blurview = { module = "com.eightbitlab:blurview", version.ref = "blurview" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -47,6 +56,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
