@@ -21,6 +21,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.database
+import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -39,32 +40,41 @@ class ProfileFragment : Fragment() {
         val profileEmailTv = view.findViewById<TextView>(R.id.profile_email_tv)
 
         val user = Firebase.auth.currentUser
-        val myRef = Firebase.database.reference.child("user").child(user?.uid.toString())
+        val userDocument = FirebaseFirestore.getInstance()
+            .collection("users")
+            .document(user?.uid.toString())
 
-        val profile_pic = view.findViewById<ImageView>(R.id.profile_pic)
+        val profilePic = view.findViewById<ImageView>(R.id.profile_pic)
 
         profileNameTv.text = "Loading..."
         profileEmailTv.text = "Loading..."
 
-        myRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (snapshot.exists()) {
-                    view.findViewById<TextView>(R.id.profile_name_tv).text = snapshot.child("name").value.toString()
-                    view.findViewById<TextView>(R.id.profile_email_tv).text = snapshot.child("email").value.toString()
-                    val profile_url = snapshot.child("profile").value.toString()
-                    if (profile_url != "null") {
-                        Glide.with(context!!)
-                            .load(profile_url)
-                            .into(profile_pic)
-                    }
-                }
+        userDocument.addSnapshotListener { documentSnapshot, error ->
+            if (error != null) {
+                profileNameTv.text = "Error Loading Data"
+                profileEmailTv.text = "Error Loading Data"
+                return@addSnapshotListener
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                view.findViewById<TextView>(R.id.profile_name_tv).text = "Error Loading Data"
-                view.findViewById<TextView>(R.id.profile_email_tv).text = "Error Loading Data"
+            if (documentSnapshot != null && documentSnapshot.exists()) {
+                val name = documentSnapshot.getString("name")
+                val email = documentSnapshot.getString("email")
+                val profileUrl = documentSnapshot.getString("profile")
+
+                profileNameTv.text = name ?: "N/A"
+                profileEmailTv.text = email ?: "N/A"
+
+                if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
+                    Glide.with(requireContext())
+                        .load(profileUrl)
+                        .into(profilePic)
+                }
+            } else {
+                profileNameTv.text = "No Data Found"
+                profileEmailTv.text = "No Data Found"
             }
-        })
+        }
+
 
         //Temporary SIGN OUT Button
         view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {

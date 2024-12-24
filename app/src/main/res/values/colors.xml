@@ -13,10 +13,11 @@
     <color name="app_colour">#001A35</color>
     <color name="background">#0a0c16</color>
     <color name="accent">#3580ff</color>
-    <color name="text_sec">#848a94</color>
+    <color name="text_sec">#B3FFFFFF</color>
     <color name="stroke">#73FFFFFF</color>
     <color name="stroke_light">#1AFFFFFF</color>
     <color name="blue">#5F93E1</color>
     <color name="text_main">#ffffff</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="accent_sec">#132445</color>
 </resources>

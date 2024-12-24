@@ -89,7 +89,7 @@
                     android:id="@+id/profile_edit_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="4dp"
                     android:backgroundTint="@android:color/transparent"
                     android:text="Sign Out"
                     app:strokeColor="@color/accent"
@@ -170,7 +170,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="28dp"
                     android:layout_marginHorizontal="20dp"
                     android:background="@drawable/outlined_search_box"
                     android:padding="20dp">
@@ -197,7 +197,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="16dp"
                     android:layout_marginHorizontal="20dp"
                     android:background="@drawable/outlined_search_box"
                     android:padding="20dp">
@@ -224,7 +224,7 @@
                 <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/outlined_search_box"
                 android:padding="20dp">
@@ -251,9 +251,9 @@
                 <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="20dp"
-                    android:layout_marginBottom="20dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/outlined_search_box"
                 android:padding="20dp">
 
