@@ -33,6 +33,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.auth
 import com.google.firebase.database.database
+import com.google.firebase.firestore.FirebaseFirestore
 
 @Suppress("DEPRECATION")
 class LoginFragment : Fragment() {
@@ -173,31 +174,33 @@ class LoginFragment : Fragment() {
             pendingResultTask
                 .addOnSuccessListener { authResult ->
                     val user = authResult.user
-                    val database = Firebase.database
-                    val myRef = database.getReference("user").child(user?.uid.toString())
 
-                    val hashMap = HashMap<String, String>()
-                    hashMap["id"] = user?.uid.toString()
-                    hashMap["email"] = user?.email.toString()
-                    hashMap["name"] = user?.displayName.toString()
-                    hashMap["profile"] = user?.photoUrl.toString()
+                    val firestore = FirebaseFirestore.getInstance()
+                    val userDocument = firestore.collection("users").document(user?.uid.toString())
 
-                    myRef.setValue(hashMap)
-                        .addOnCompleteListener({ task1 ->
-                            if (task1.isSuccessful) {
+                    val userMap = hashMapOf(
+                        "id" to user?.uid.toString(),
+                        "email" to user?.email.toString(),
+                        "name" to user?.displayName.toString(),
+                        "profile" to user?.photoUrl.toString()
+                    )
+
+                    userDocument.set(userMap)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
                                 startActivity(Intent(activity, BaseHomeActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Sign up unsuccessful. " + task1.exception + "",
+                                    "Sign up unsuccessful. ${task.exception}",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 user?.delete()
                                 progressDialog.dismiss()
                             }
-                        })
+                        }
                 }
                 .addOnFailureListener { e ->
                     progressDialog.dismiss()
@@ -207,31 +210,33 @@ class LoginFragment : Fragment() {
             auth.startActivityForSignInWithProvider(requireActivity(), provider.build())
                 .addOnSuccessListener { authResult ->
                     val user = authResult.user
-                    val database = Firebase.database
-                    val myRef = database.getReference("user").child(user?.uid.toString())
 
-                    val hashMap = HashMap<String, String>()
-                    hashMap["id"] = user?.uid.toString()
-                    hashMap["email"] = user?.email.toString()
-                    hashMap["name"] = user?.displayName.toString()
-                    hashMap["profile"] = user?.photoUrl.toString()
+                    val firestore = FirebaseFirestore.getInstance()
+                    val userDocument = firestore.collection("users").document(user?.uid.toString())
 
-                    myRef.setValue(hashMap)
-                        .addOnCompleteListener({ task1 ->
-                            if (task1.isSuccessful) {
+                    val userMap = hashMapOf(
+                        "id" to user?.uid.toString(),
+                        "email" to user?.email.toString(),
+                        "name" to user?.displayName.toString(),
+                        "profile" to user?.photoUrl.toString()
+                    )
+
+                    userDocument.set(userMap)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
                                 startActivity(Intent(activity, BaseHomeActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Sign up unsuccessful. " + task1.exception + "",
+                                    "Sign up unsuccessful. ${task.exception}",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 user?.delete()
                                 progressDialog.dismiss()
                             }
-                        })
+                        }
                 }
                 .addOnFailureListener { e ->
                     progressDialog.dismiss()
@@ -247,31 +252,33 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    val database = Firebase.database
-                    val myRef = database.getReference("user").child(user?.uid.toString())
 
-                    val hashMap = HashMap<String, String>()
-                    hashMap["id"] = user?.uid.toString()
-                    hashMap["email"] = user?.email.toString()
-                    hashMap["name"] = user?.displayName.toString()
-                    hashMap["profile"] = user?.photoUrl.toString()
+                    val firestore = FirebaseFirestore.getInstance()
+                    val userDocument = firestore.collection("users").document(user?.uid.toString())
 
-                    myRef.setValue(hashMap)
-                        .addOnCompleteListener({ task1 ->
-                            if (task1.isSuccessful) {
+                    val userMap = hashMapOf(
+                        "id" to user?.uid.toString(),
+                        "email" to user?.email.toString(),
+                        "name" to user?.displayName.toString(),
+                        "profile" to user?.photoUrl.toString()
+                    )
+
+                    userDocument.set(userMap)
+                        .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
                                 startActivity(Intent(activity, BaseHomeActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
                                 Toast.makeText(
                                     context,
-                                    "Sign up unsuccessful. " + task1.exception + "",
+                                    "Sign up unsuccessful. ${task.exception}",
                                     Toast.LENGTH_LONG
                                 ).show()
                                 user?.delete()
                                 progressDialog.dismiss()
                             }
-                        })
+                        }
                 } else {
                     Toast.makeText(context, "Authentication Failed.", Toast.LENGTH_SHORT).show()
                     progressDialog.dismiss()
