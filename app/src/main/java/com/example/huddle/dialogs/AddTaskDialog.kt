@@ -82,7 +82,7 @@ class AddTaskDialog : DialogFragment() {
                     "AM"
                 }
 
-                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else selectedHour
+                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
                 val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
                 start_time_edt.setText(timeString)
             }
@@ -104,7 +104,7 @@ class AddTaskDialog : DialogFragment() {
                     "AM"
                 }
 
-                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else selectedHour
+                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
                 val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
                 end_time_edt.setText(timeString)
             }
