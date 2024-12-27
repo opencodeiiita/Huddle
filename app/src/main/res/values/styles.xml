@@ -4,7 +4,7 @@
 
     <style name="MyBottomNavBar" parent="Widget.MaterialComponents.BottomNavigationView">
         <!--        <item name="itemBackground">@color/system</item>-->
-        <item name="android:background">@color/app_colour</item>
+        <item name="android:background">@color/background</item>
         <!--        <item name="android:textColor">@color/red</item>-->
         <item name="itemHorizontalTranslationEnabled">false</item>
     </style>

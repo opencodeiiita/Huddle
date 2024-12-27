@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.example.huddle.R
 import com.example.huddle.activities.BaseHomeActivity
+import com.example.huddle.activities.OnBoardingActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -196,7 +197,7 @@ class SignUpFragment : Fragment() {
                     userDocument.set(userMap)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                startActivity(Intent(activity, BaseHomeActivity::class.java))
+                                startActivity(Intent(activity, OnBoardingActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
@@ -239,7 +240,7 @@ class SignUpFragment : Fragment() {
                     userDocument.set(userMap)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                startActivity(Intent(activity, BaseHomeActivity::class.java))
+                                startActivity(Intent(activity, OnBoardingActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
@@ -273,7 +274,7 @@ class SignUpFragment : Fragment() {
                     myRef.setValue(hashMap)
                         .addOnCompleteListener({ task1 ->
                             if (task1.isSuccessful) {
-                                startActivity(Intent(activity, BaseHomeActivity::class.java))
+                                startActivity(Intent(activity, OnBoardingActivity::class.java))
                                 activity?.finish()
                                 progressDialog.dismiss()
                             } else {
