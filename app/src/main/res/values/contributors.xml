@@ -13,20 +13,21 @@
 <resources>
     <item name="participant" type="string">
         <participant>
+            <name>Yasmin</name>
+            <github_id>YASMIN-SEKH</github_id>
+        </participant>
+        <participant>
             <name>Sudhanshu</name>
             <github_id>sahsudhanshu</github_id>
         </participant>
-        
         <participant>
             <name>Holly Yen</name>
             <github_id>hollyyen</github_id>
         </participant>
-
         <participant>
             <name>Swarup Narkhede</name>
             <github_id>swarupn17</github_id>
         </participant>
-
         <participant>
             <name>Priyam Chakrabarty</name>
             <github_id>PriyamJChakrabarty</github_id>
@@ -39,16 +40,13 @@
             <name>Kartik Sharma</name>
             <github_id>kartiksharma1227</github_id>
          </participant>
-
          <participant>
             <name>Nitya Bhavsar</name>
             <github_id>NityaB25</github_id>
          </participant>
-
         <participant>
             <name>Ashish Saraswat</name>
             <github_id>Asheeesh9</github_id>
-
         </participant>
         <participant>
             <name>Rigzin</name>
@@ -57,7 +55,6 @@
         <participant>
         <name>Snehal Gupta</name>
         <github_id>Snehalgupta-07</github_id>
-
         </participant>
         <participant>
             <name>Ishita Agrawal</name>
@@ -83,7 +80,6 @@
             <name> Kanav Agrawal </name>
             <github_id> HGRgamer </github_id>
       </participant>
-
       <participant>
             <name> Asim Kalim </name>
             <github_id> kalim-Asim </github_id>
@@ -99,8 +95,7 @@
         <participant>
                 <name>Abdul Azeem Ansari</name>
                 <github_id>23abdul23</github_id>
-            </participant>
-
+        </participant>
         <participant>
                 <name>Samandeep Singh Sidhu</name>
                 <github_id>Darkknight0125</github_id>
@@ -132,7 +127,6 @@
         <participant>
             <name>Debmallya Bhandari</name>
             <github_id>Debmallya-03</github_id>
-
         </participant>
         <participant>
             <name>Rajdeep Paul</name>
@@ -179,12 +173,24 @@
             <github_id>Debankur04</github_id>
         </participant>
         <participant>
-        <name> Tamanna Kapoor </name>
-        <github_id> tamannaakapoor </github_id>
+            <name> Tamanna Kapoor </name>
+            <github_id> tamannaakapoor </github_id>
         </participant>
         <participant>
-        <name> Debmallya Bhandari </name>
-        <github_id> Debmallya-03 </github_id>
+            <name> Debmallya Bhandari </name>
+            <github_id> Debmallya-03 </github_id>
+        </participant>
+         <participant>
+            <name>Aditya Pachauri</name>
+            <github_id>Aditya-Pachauri</github_id>
+        </participant>
+         <participant>
+            <name> Harsh Krishnan </name>
+            <github_id> iking07 </github_id>
+        </participant>
+         <participant>
+            <name>Ibrahim Raza Beg</name>
+            <github_id>PHOX-9</github_id>
         </participant>
     </item>
 </resources>
