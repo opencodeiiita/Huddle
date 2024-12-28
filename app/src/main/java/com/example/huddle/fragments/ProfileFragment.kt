@@ -1,5 +1,9 @@
 package com.example.huddle.fragments
 
+
+import android.widget.RelativeLayout
+import com.example.huddle.activities.SettingsActivity
+
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -96,6 +100,12 @@ class ProfileFragment : Fragment() {
             activity?.finish()
             startActivity(Intent(context, LoginActivity::class.java))
         }
+
+        view.findViewById<RelativeLayout>(R.id.settings_layout).setOnClickListener {
+            val intent = Intent(requireContext(), SettingsActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
