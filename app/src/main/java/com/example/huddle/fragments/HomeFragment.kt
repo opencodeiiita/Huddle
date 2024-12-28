@@ -54,6 +54,8 @@ class HomeFragment : Fragment() {
         val dayOfMonth = currentDate.dayOfMonth
         view.findViewById<TextView>(R.id.home_time_tv).setText("$dayOfWeek, $dayOfMonth")
 
+        val user = Firebase.auth.currentUser?.uid.toString()
+
         taskShimmerLayout = view.findViewById(R.id.task_shimmer_layout)
         taskShimmerLayout.startShimmer()
 
@@ -89,13 +91,7 @@ class HomeFragment : Fragment() {
                     taskList.clear()
                     for (document in snapshots) {
                         val task = document.toObject(Task::class.java)
-                        val root = db.collection("myTask").document(document.id).collection("users")
-                        root.document(Firebase.auth.currentUser?.uid.toString()).get()
-                            .addOnSuccessListener { document ->
-                                if (document.exists()) {
-                                    taskList.add(task)
-                                }
-                            }
+                        if(task.users.contains(user)) taskList.add(task)
                     }
                     Handler(Looper.getMainLooper()).postDelayed({
                         taskShimmerLayout.stopShimmer()
@@ -116,13 +112,7 @@ class HomeFragment : Fragment() {
                     projectList.clear()
                     for (document in snapshots) {
                         val task = document.toObject(Project::class.java)
-                        val root = db.collection("Project").document(document.id).collection("users")
-                        root.document(Firebase.auth.currentUser?.uid.toString()).get()
-                            .addOnSuccessListener { document ->
-                                if (document.exists()) {
-                                    projectList.add(task)
-                                }
-                            }
+                        if(task.users.contains(user)) projectList.add(task)
                     }
                     Handler(Looper.getMainLooper()).postDelayed({
                         projectShimmerLayout.stopShimmer()

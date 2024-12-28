@@ -4,5 +4,6 @@ data class Task(
     val desc: String = "",
     val name: String = "",
     val taskDate: String = "",
-    val taskProgress: Int = 0
+    val taskProgress: Int = 0,
+    val users: List<String> = emptyList()
 )

@@ -31,6 +31,7 @@
                 android:padding="12dp"
                 android:src="@drawable/baseline_arrow_back_ios_new_24"
                 app:tint="@color/text_main" />
+
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
@@ -77,9 +78,10 @@
                 app:placeholderTextColor="@color/accent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_project_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textCapSentences"
+                    android:inputType="textCapWords"
                     android:textColor="@color/text_main"
                     android:textColorHint="@color/text_sec" />
 
@@ -109,9 +111,13 @@
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"/>
 
-                    <!-- Add team member views here -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/project_member_rv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add_member_project"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:strokeColor="@color/accent"
@@ -145,6 +151,73 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="20dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_weight="1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Start Date"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:textColorHint="@color/text_sec"
+                    app:hintTextColor="@color/accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sign_text"
+                    app:placeholderTextColor="@color/accent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/start_date_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="date"
+                        android:textColor="@color/text_main"
+                        android:textColorHint="@color/text_sec" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:hint="End Date"
+                    app:boxCornerRadiusBottomEnd="16dp"
+                    app:boxCornerRadiusBottomStart="16dp"
+                    app:boxCornerRadiusTopEnd="16dp"
+                    app:boxCornerRadiusTopStart="16dp"
+                    android:textColorHint="@color/text_sec"
+                    app:hintTextColor="@color/accent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/sign_text"
+                    app:placeholderTextColor="@color/accent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/end_date_edt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:inputType="date"
+                        android:textColor="@color/text_main"
+                        android:textColorHint="@color/text_sec" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
                 android:layout_marginHorizontal="20dp"
                 android:orientation="horizontal">
 
@@ -232,46 +305,109 @@
                         android:layout_width="20dp"
                         android:layout_height="wrap_content" />
 
-                    <!-- Label Options -->
-                    <View
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/label_default"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/background"
+                        app:strokeColor="@color/stroke_light"
                         android:layout_marginEnd="16dp"
-                        android:background="@drawable/label_pink" />
+                        app:cardCornerRadius="8dp">
 
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/label_yellow" />
+                        <ImageView
+                            android:id="@+id/label_default_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/tick_square"
+                            app:tint="@color/text_main"
+                            android:padding="12dp"
+                            android:background="@drawable/label_selected_bg"/>
 
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/label_blue" />
+                    </com.google.android.material.card.MaterialCardView>
 
-                    <View
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:layout_marginEnd="16dp"
-                        android:background="@drawable/label_red" />
-
-                    <!-- Add Label Button -->
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        app:strokeColor="@color/accent"
-                        app:cardCornerRadius="24dp"
-                        app:cardBackgroundColor="@color/background"
-                        app:cardElevation="0dp">
+                        app:cardBackgroundColor="@color/label_cyan"
+                        app:strokeColor="@color/stroke_light"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
 
                         <ImageView
+                            android:id="@+id/label_cyan_iv"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="12dp"
-                            android:src="@drawable/baseline_add_24"
-                            app:tint="@color/accent" />
+                            app:tint="@color/text_main"
+                            android:padding="12dp"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/label_green"
+                        app:strokeColor="@color/stroke_light"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:id="@+id/label_green_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:tint="@color/text_main"
+                            android:padding="12dp"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/label_magenta"
+                        app:strokeColor="@color/stroke_light"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:id="@+id/label_magenta_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:tint="@color/text_main"
+                            android:padding="12dp"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/accent"
+                        app:strokeColor="@color/stroke_light"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:id="@+id/label_accent_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:tint="@color/text_main"
+                            android:padding="12dp"/>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        app:cardBackgroundColor="@color/label_orange"
+                        app:strokeColor="@color/stroke_light"
+                        android:layout_marginEnd="16dp"
+                        app:cardCornerRadius="8dp">
+
+                        <ImageView
+                            android:id="@+id/label_orange_iv"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:tint="@color/text_main"
+                            android:padding="12dp"/>
+
                     </com.google.android.material.card.MaterialCardView>
 
                     <Space
@@ -301,6 +437,7 @@
                 app:placeholderTextColor="@color/accent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_project_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences"
@@ -308,7 +445,6 @@
                     android:textColorHint="@color/text_sec" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_project_btn"

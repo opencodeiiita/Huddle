@@ -10,7 +10,6 @@
     <color name="white">#FFFFFFFF</color>
 
     //Brand Colors
-    <color name="app_colour">#001A35</color>
     <color name="background">#0a0c16</color>
     <color name="accent">#3580ff</color>
     <color name="text_sec">#B3FFFFFF</color>
@@ -20,4 +19,9 @@
     <color name="text_main">#ffffff</color>
     <color name="transparent">#00FFFFFF</color>
     <color name="accent_sec">#132445</color>
+
+    <color name="label_green">#4CAF50</color>
+    <color name="label_cyan">#03A1B6</color>
+    <color name="label_magenta">#9C27B0</color>
+    <color name="label_orange">#FF5722</color>
 </resources>
