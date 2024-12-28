@@ -107,6 +107,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!-- Team Member layout -->
+
                     <Space
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"/>
