@@ -5,8 +5,8 @@
     This file contains the list of all the Participants who participated in contributing to Huddle-App
     Add your name in this file in the following format-
         <participant>
-            <name>Paras Pandey</name>
-            <github_id>Paraspandey-debugs</github_id>
+            <name>Grish Gautam</name>
+            <github_id>deadmoont/github_id>
         </participant>
     all the participants information must be inside the participant item.
     An example is provided for your reference.-->
