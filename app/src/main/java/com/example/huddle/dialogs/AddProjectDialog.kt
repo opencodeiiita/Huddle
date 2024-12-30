@@ -228,7 +228,12 @@ class AddProjectDialog : DialogFragment() {
                     "projectProgress" to 0,
                     "totalTask" to 0,
                     "color" to selectedColor,
-                    "users" to memberList
+                    "users" to memberList,
+                    "taskDetails" to mapOf(
+                        "completed" to 0,
+                        "onGoing" to 0,
+                        "upcoming" to 0
+                    )
                 )
 
                 userDocument.set(projectMap)

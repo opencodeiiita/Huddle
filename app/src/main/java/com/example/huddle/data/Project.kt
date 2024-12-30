@@ -10,5 +10,6 @@ data class Project(
     val endDate: String = "",
     val startTime: String = "",
     val endTime: String = "",
-    val users: List<String> = emptyList()
+    val users: List<String> = emptyList(),
+    val taskDetails: Map<String, Int> = emptyMap()
 )

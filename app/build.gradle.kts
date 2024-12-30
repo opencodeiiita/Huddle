@@ -70,6 +70,9 @@ dependencies {
 
     //Added Splash Screen API Dependency
     implementation(libs.androidx.core.splashscreen)
+    //Shimmer Layout
     implementation(libs.shimmer)
+    //Circle Image View
     implementation(libs.circleimageview)
+
 }
