@@ -102,7 +102,7 @@ class HomeFragment : Fragment() {
                 }
             }
 
-        db.collection("Project")
+        db.collection("Project").limit(8)
             .addSnapshotListener { snapshots, error ->
                 if (error != null) {
                     return@addSnapshotListener

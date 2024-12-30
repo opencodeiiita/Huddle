@@ -194,7 +194,7 @@
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="32dp"
                     android:text="Sign up"
-                    android:textColor="@color/text_main"
+                    android:textColor="@color/white"
                     android:textSize="18sp"
                     app:cornerRadius="16dp" />
 
@@ -245,6 +245,7 @@
                         app:cardBackgroundColor="@color/background"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp"
+                        app:strokeColor="@color/stroke"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -262,6 +263,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_margin="20dp"
+                        app:strokeColor="@color/stroke"
                         app:cardBackgroundColor="@color/background"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp"

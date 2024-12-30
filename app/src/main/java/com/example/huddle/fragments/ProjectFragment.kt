@@ -61,6 +61,7 @@ class ProjectFragment : Fragment() {
         }
 
         val db = FirebaseFirestore.getInstance()
+        val user = Firebase.auth.currentUser?.uid.toString()
 
         db.collection("Project")
             .addSnapshotListener { snapshots, error ->
@@ -72,7 +73,7 @@ class ProjectFragment : Fragment() {
                     projectList.clear()
                     for (document in snapshots) {
                         val userData = document.toObject(Project::class.java)
-                        projectList.add(userData)
+                        if(userData.users.contains(user)) projectList.add(userData)
                     }
                     Handler(Looper.getMainLooper()).postDelayed({
                         projectShimmerLayout.stopShimmer()

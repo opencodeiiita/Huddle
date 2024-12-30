@@ -39,7 +39,7 @@ class OnBoardingActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
-        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
 
         val window = window
         if (isNightMode) {

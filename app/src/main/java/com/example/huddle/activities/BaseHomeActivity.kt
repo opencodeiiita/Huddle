@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.RelativeLayout
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -28,7 +29,7 @@ import com.google.android.material.card.MaterialCardView
 
 class BaseHomeActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
-    private var previousItemId: Int = R.id.navigation_item1
+    private var previousItemId: Int = 0
 
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,7 +37,10 @@ class BaseHomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_base_home)
 
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
-        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
+
+        val nav_sp = getSharedPreferences("navigation", MODE_PRIVATE)
+        val nav_item = nav_sp.getString("nav_item", "Home")
 
         val window = window
         if (isNightMode) {
@@ -48,13 +52,31 @@ class BaseHomeActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val addButton: MaterialCardView = findViewById(R.id.AddButton)
 
-        currentFragment = HomeFragment()
+        if(nav_item == "Profile") {
+            bottomNavigationView.selectedItemId = R.id.navigation_item4
+            previousItemId = R.id.navigation_item4
+        } else if(nav_item == "Project") {
+            bottomNavigationView.selectedItemId = R.id.navigation_item2
+            previousItemId = R.id.navigation_item2
+        } else if(nav_item == "Community") {
+            bottomNavigationView.selectedItemId = R.id.navigation_item3
+            previousItemId = R.id.navigation_item3
+        } else {
+            bottomNavigationView.selectedItemId = R.id.navigation_item1
+            previousItemId = R.id.navigation_item1
+        }
+
+        currentFragment = if(nav_item == "Profile") ProfileFragment() else if(nav_item == "Project") ProjectFragment() else if(nav_item == "Community") CommunityFragment() else HomeFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, currentFragment!!, "HOME")
+            .replace(R.id.nav_host_fragment, currentFragment, nav_item)
             .commit()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             if (item.itemId == previousItemId) return@setOnItemSelectedListener false
+
+            val editor = nav_sp.edit()
+            editor.putString("nav_item", item.title.toString())
+            editor.apply()
 
             val newFragment = when (item.itemId) {
                 R.id.navigation_item1 -> getOrCreateFragment("HOME", HomeFragment())

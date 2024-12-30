@@ -23,13 +23,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
-        if (!sharedPreferences.contains("isNightMode")) {
-            val editor = sharedPreferences.edit()
-            editor.putBoolean("isNightMode", true)
-            editor.apply()
-        }
 
-        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
 
         val window = window
         if (isNightMode) {

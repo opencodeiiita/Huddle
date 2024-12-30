@@ -115,7 +115,7 @@
         android:layout_marginVertical="20dp"
         android:layout_gravity="center_horizontal"
         android:text="Done"
-        android:textColor="@color/text_main"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"

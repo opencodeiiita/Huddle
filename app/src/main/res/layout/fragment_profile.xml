@@ -56,7 +56,7 @@
                     android:layout_marginTop="32dp"
                     app:cardCornerRadius="60dp"
                     android:layout_gravity="center"
-                    app:strokeColor="@color/accent">
+                    app:strokeColor="@color/stroke_light">
 
                     <ImageView
                         android:id="@+id/profile_pic"
@@ -132,8 +132,14 @@
                             android:text="On Going"
                             android:layout_marginTop="2dp"
                             android:textColor="@color/text_sec"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_marginVertical="8dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/stroke"/>
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -163,7 +169,7 @@
                             android:text="Total Complete"
                             android:layout_marginTop="2dp"
                             android:textColor="@color/text_sec"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
 

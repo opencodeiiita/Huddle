@@ -10,7 +10,7 @@
     <color name="white">#FFFFFFFF</color>
 
     //Brand Colors
-    <color name="background">#e6ecf9</color>
+    <color name="background">#f5fbff</color>
     <color name="accent">#3580ff</color>
     <color name="text_sec">#B3000000</color>
     <color name="stroke">#73000000</color>

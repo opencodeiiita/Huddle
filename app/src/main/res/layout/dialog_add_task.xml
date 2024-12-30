@@ -332,7 +332,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
                 android:text="Save"
-                android:textColor="@color/text_main"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="16dp" />
 

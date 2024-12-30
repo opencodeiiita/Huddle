@@ -18,7 +18,7 @@ class SettingsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_settings)
 
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
-        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
 
         val window = window
         if (isNightMode) {

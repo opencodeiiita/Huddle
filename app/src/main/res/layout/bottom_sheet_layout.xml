@@ -152,7 +152,7 @@
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/baseline_close_24"
-            app:tint="@color/text_main"/>
+            app:tint="@color/white"/>
 
     </com.google.android.material.card.MaterialCardView>
 
