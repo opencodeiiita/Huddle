@@ -4,10 +4,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
+import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.RelativeLayout
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
@@ -26,9 +30,20 @@ class BaseHomeActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
     private var previousItemId: Int = R.id.navigation_item1
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base_home)
+
+        val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+
+        val window = window
+        if (isNightMode) {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
+        } else {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS)
+        }
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val addButton: MaterialCardView = findViewById(R.id.AddButton)

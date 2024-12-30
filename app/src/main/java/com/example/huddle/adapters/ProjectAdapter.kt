@@ -61,7 +61,8 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
         }
 
         val color = Color.parseColor(project.color)
-        holder.project_card_parent.setCardBackgroundColor(color)
+        if(project.color == "#0a0c16") holder.project_card_parent.setCardBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.background))
+        else holder.project_card_parent.setCardBackgroundColor(color)
 
         if (project.totalTask == 0) {
             holder.project_progress_pi.visibility = View.GONE

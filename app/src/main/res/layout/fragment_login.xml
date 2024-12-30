@@ -209,6 +209,7 @@
                         app:cardBackgroundColor="@color/background"
                         app:cardCornerRadius="20dp"
                         app:cardElevation="0dp"
+                        app:strokeColor="@color/stroke"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -228,6 +229,7 @@
                         android:layout_margin="20dp"
                         app:cardBackgroundColor="@color/background"
                         app:cardCornerRadius="20dp"
+                        app:strokeColor="@color/stroke"
                         app:cardElevation="0dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

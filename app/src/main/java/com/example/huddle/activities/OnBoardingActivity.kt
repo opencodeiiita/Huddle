@@ -1,9 +1,12 @@
 package com.example.huddle.activities
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -25,6 +28,7 @@ class OnBoardingActivity : AppCompatActivity() {
         R.layout.on_board_screen3
     )
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
@@ -32,6 +36,18 @@ class OnBoardingActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", true)
+
+        val window = window
+        if (isNightMode) {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
+        } else {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(
+                APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS
+            )
         }
 
         viewPager = findViewById(R.id.viewPager)

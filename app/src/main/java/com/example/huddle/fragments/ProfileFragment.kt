@@ -5,6 +5,7 @@ import android.widget.RelativeLayout
 import com.example.huddle.activities.SettingsActivity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -64,9 +65,13 @@ class ProfileFragment : Fragment() {
                 profileEmailTv.text = email ?: "N/A"
 
                 if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
-                    Glide.with(requireContext())
-                        .load(profileUrl)
-                        .into(profilePic)
+                    try {
+                        Glide.with(requireContext())
+                            .load(profileUrl)
+                            .into(profilePic)
+                    } catch(e: Exception) {
+                        Log.e("ProfileFragment", "Error loading profile picture: ${e.message}")
+                    }
                 }
             } else {
                 profileNameTv.text = "No Data Found"
