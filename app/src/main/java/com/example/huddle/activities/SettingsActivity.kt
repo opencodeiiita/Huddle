@@ -11,7 +11,7 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        findViewById<MaterialCardView>(R.id.settings_back_button).setOnClickListener {
+        findViewById<MaterialCardView>(R.id.fragment_settings_back).setOnClickListener {
             // Finish the current activity to go back to the previous one (ProfileFragment or another activity)
             finish()
         }

@@ -21,6 +21,8 @@
     <color name="accent_sec">#132445</color>
 
     <color name="label_green">#4CAF50</color>
+    <color name="circle_yellow">#ffb35a</color>
+    <color name="circle_green">#b1d199</color>
     <color name="label_cyan">#03A1B6</color>
     <color name="label_magenta">#9C27B0</color>
     <color name="label_orange">#FF5722</color>

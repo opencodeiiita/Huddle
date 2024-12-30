@@ -90,10 +90,9 @@ class SearchUserDialog : DialogFragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                val query = s.toString().trim()
+                val query = s.toString().trim().lowercase()
                 if (query.isNotEmpty()) {
                     db.collection("users")
-                        .orderBy("name", Query.Direction.ASCENDING)
                         .orderBy("email", Query.Direction.ASCENDING)
                         .startAt(query)
                         .endAt(query + "\uf8ff")

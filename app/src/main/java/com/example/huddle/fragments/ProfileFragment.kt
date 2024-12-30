@@ -3,7 +3,6 @@ package com.example.huddle.fragments
 
 import android.widget.RelativeLayout
 import com.example.huddle.activities.SettingsActivity
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,10 +20,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
 
 class ProfileFragment : Fragment() {
