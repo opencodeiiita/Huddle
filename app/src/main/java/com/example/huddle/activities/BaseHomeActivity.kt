@@ -1,17 +1,14 @@
 package com.example.huddle.activities
 
 import android.app.Dialog
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
-import android.view.View
 import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.RelativeLayout
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
@@ -39,8 +36,8 @@ class BaseHomeActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
         val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
 
-        val nav_sp = getSharedPreferences("navigation", MODE_PRIVATE)
-        val nav_item = nav_sp.getString("nav_item", "Home")
+        val navSp = getSharedPreferences("navigation", MODE_PRIVATE)
+        val navItem = navSp.getString("nav_item", "Home")
 
         val window = window
         if (isNightMode) {
@@ -52,29 +49,34 @@ class BaseHomeActivity : AppCompatActivity() {
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
         val addButton: MaterialCardView = findViewById(R.id.AddButton)
 
-        if(nav_item == "Profile") {
-            bottomNavigationView.selectedItemId = R.id.navigation_item4
-            previousItemId = R.id.navigation_item4
-        } else if(nav_item == "Project") {
-            bottomNavigationView.selectedItemId = R.id.navigation_item2
-            previousItemId = R.id.navigation_item2
-        } else if(nav_item == "Community") {
-            bottomNavigationView.selectedItemId = R.id.navigation_item3
-            previousItemId = R.id.navigation_item3
-        } else {
-            bottomNavigationView.selectedItemId = R.id.navigation_item1
-            previousItemId = R.id.navigation_item1
+        when (navItem) {
+            "Profile" -> {
+                bottomNavigationView.selectedItemId = R.id.navigation_item4
+                previousItemId = R.id.navigation_item4
+            }
+            "Project" -> {
+                bottomNavigationView.selectedItemId = R.id.navigation_item2
+                previousItemId = R.id.navigation_item2
+            }
+            "Community" -> {
+                bottomNavigationView.selectedItemId = R.id.navigation_item3
+                previousItemId = R.id.navigation_item3
+            }
+            else -> {
+                bottomNavigationView.selectedItemId = R.id.navigation_item1
+                previousItemId = R.id.navigation_item1
+            }
         }
 
-        currentFragment = if(nav_item == "Profile") ProfileFragment() else if(nav_item == "Project") ProjectFragment() else if(nav_item == "Community") CommunityFragment() else HomeFragment()
+        currentFragment = if(navItem == "Profile") ProfileFragment() else if(navItem == "Project") ProjectFragment() else if(navItem == "Community") CommunityFragment() else HomeFragment()
         supportFragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, currentFragment, nav_item)
+            .replace(R.id.nav_host_fragment, currentFragment, navItem)
             .commit()
 
         bottomNavigationView.setOnItemSelectedListener { item ->
             if (item.itemId == previousItemId) return@setOnItemSelectedListener false
 
-            val editor = nav_sp.edit()
+            val editor = navSp.edit()
             editor.putString("nav_item", item.title.toString())
             editor.apply()
 
@@ -112,7 +114,7 @@ class BaseHomeActivity : AppCompatActivity() {
                 if (isForward) R.anim.slide_out_left else R.anim.slide_out_right
             )
 
-            currentFragment?.let { transaction.hide(it) }
+            currentFragment.let { transaction.hide(it) }
 
             if (fragment.isAdded) {
                 transaction.show(fragment)

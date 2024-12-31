@@ -1,6 +1,7 @@
 package com.example.huddle.data
 
 data class Project(
+    val projectId: String = "",
     val projectName: String = "",
     val projectDesc: String = "",
     val totalTask: Int = 0,
@@ -11,5 +12,6 @@ data class Project(
     val startTime: String = "",
     val endTime: String = "",
     val users: List<String> = emptyList(),
-    val taskDetails: Map<String, Int> = emptyMap()
+    val taskDetails: Map<String, Int> = emptyMap(),
+    var favourite: Boolean = false
 )

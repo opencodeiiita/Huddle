@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.huddle.R
@@ -96,6 +97,11 @@ class ProfileFragment : Fragment() {
                 googleSignInClient.signOut()
                 googleSignInClient.revokeAccess()
             }
+
+            val navSp = activity?.getSharedPreferences("navigation", MODE_PRIVATE)
+            val editor = navSp?.edit()
+            editor?.putString("nav_item", "Home")
+            editor?.apply()
 
             activity?.finish()
             startActivity(Intent(context, LoginActivity::class.java))

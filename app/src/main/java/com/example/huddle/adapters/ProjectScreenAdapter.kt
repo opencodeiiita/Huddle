@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.compose.foundation.layout.size
@@ -21,6 +22,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
+import com.google.firebase.firestore.firestore
 import kotlin.math.min
 
 class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerView.Adapter<ProjectScreenAdapter.ProjectViewHolder>() {
@@ -32,6 +34,7 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
         val project_progress_pi = view.findViewById<LinearProgressIndicator>(R.id.project_progress_pi)
         val project_member_rv = view.findViewById<RecyclerView>(R.id.member_project_rv)
         val project_progress_parent = view.findViewById<MaterialCardView>(R.id.project_progress_parent)
+        val project_fav_iv = view.findViewById<ImageView>(R.id.project_fav_iv)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProjectViewHolder {
@@ -65,6 +68,28 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
         val memberCount = min(project.users.size, 3)
         memberList.addAll(project.users.subList(0, memberCount))
         memberAdapter.notifyItemRangeInserted(memberList.size - memberCount, memberCount)
+
+        if(project.favourite) {
+            holder.project_fav_iv.setImageResource(R.drawable.round_star_24)
+            holder.project_fav_iv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.circle_yellow))
+        } else {
+            holder.project_fav_iv.setImageResource(R.drawable.round_star_border_24)
+            holder.project_fav_iv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.stroke))
+        }
+
+        holder.project_fav_iv.setOnClickListener {
+            if(project.favourite) {
+                project.favourite = false
+                holder.project_fav_iv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.stroke))
+                holder.project_fav_iv.setImageResource(R.drawable.round_star_border_24)
+                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", false)
+            } else {
+                project.favourite = true
+                holder.project_fav_iv.setImageResource(R.drawable.round_star_24)
+                holder.project_fav_iv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.circle_yellow))
+                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", true)
+            }
+        }
 
         if (project.totalTask == 0) {
             holder.project_progress_pi.visibility = View.GONE

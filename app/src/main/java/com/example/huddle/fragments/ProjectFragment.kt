@@ -1,14 +1,14 @@
 package com.example.huddle.fragments
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.huddle.R
 import com.example.huddle.adapters.ProjectScreenAdapter
 import com.example.huddle.data.Project
-import com.example.huddle.data.User
 import com.example.huddle.dialogs.AddProjectDialog
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.card.MaterialCardView
@@ -31,7 +30,9 @@ class ProjectFragment : Fragment() {
     private lateinit var projectShimmerLayout: ShimmerFrameLayout
     private lateinit var projectAdapter: ProjectScreenAdapter
     private val projectList = mutableListOf<Project>()
-    private val searchResults = mutableListOf<String>()
+    private var chipViews = listOf<MaterialCardView>()
+    private var selectedView = view?.findViewById<MaterialCardView>(R.id.all_cv)
+    private lateinit var noResultsTv: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -63,28 +64,27 @@ class ProjectFragment : Fragment() {
         val db = FirebaseFirestore.getInstance()
         val user = Firebase.auth.currentUser?.uid.toString()
 
-        db.collection("Project")
-            .addSnapshotListener { snapshots, error ->
-                if (error != null) {
-                    return@addSnapshotListener
-                }
+        chipViews = listOf(
+            view.findViewById(R.id.all_cv),
+            view.findViewById(R.id.recents_cv),
+            view.findViewById(R.id.favourites_cv)
+        )
+        selectedView = chipViews[0]
 
-                if (snapshots != null) {
-                    projectList.clear()
-                    for (document in snapshots) {
-                        val userData = document.toObject(Project::class.java)
-                        if(userData.users.contains(user)) projectList.add(userData)
-                    }
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        projectShimmerLayout.stopShimmer()
-                        projectShimmerLayout.visibility = View.GONE
-                        projectAdapter.notifyDataSetChanged()
-                        projectRecyclerView.visibility = View.VISIBLE
-                    }, 1000)
+        chipViews.forEachIndexed { index, view ->
+            view.setOnClickListener {
+                updateProjectList()
+                selectedView = chipViews[index]
+                chipViews.forEach {
+                    it.setStrokeColor(ContextCompat.getColorStateList(requireContext(), R.color.transparent))
                 }
+                view.setStrokeColor(ContextCompat.getColorStateList(requireContext(), R.color.accent))
             }
+        }
 
-        val noResultsTv = view.findViewById<TextView>(R.id.no_results_tv)
+        updateProjectList()
+
+        noResultsTv = view.findViewById(R.id.no_results_tv)
 
         view.findViewById<TextInputEditText>(R.id.project_search_edt).addTextChangedListener(object :
             TextWatcher {
@@ -106,44 +106,55 @@ class ProjectFragment : Fragment() {
                                 projectList.clear()
                                 for (document in snapshots) {
                                     val projectData = document.toObject(Project::class.java)
-                                    projectList.add(projectData)
+                                    if (selectedView == chipViews[0] && projectData.users.contains(user)) projectList.add(projectData)
+                                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite) projectList.add(projectData)
                                 }
 
                                 if (projectList.isEmpty()) {
                                     noResultsTv.visibility = View.VISIBLE
                                 } else {
-                                    noResultsTv.visibility = View.GONE
+                                    noResultsTv.visibility = GONE
                                 }
 
                                 projectAdapter.notifyDataSetChanged()
                             }
                         }
                 } else {
-                    db.collection("Project")
-                        .addSnapshotListener { snapshots, error ->
-                            if (error != null) {
-                                return@addSnapshotListener
-                            }
-
-                            if (snapshots != null) {
-                                projectList.clear()
-                                for (document in snapshots) {
-                                    val projectData = document.toObject(Project::class.java)
-                                    projectList.add(projectData)
-                                }
-
-                                if (projectList.isEmpty()) {
-                                    noResultsTv.visibility = View.VISIBLE
-                                } else {
-                                    noResultsTv.visibility = View.GONE
-                                }
-
-                                projectAdapter.notifyDataSetChanged()
-                            }
-                        }
+                    updateProjectList()
                 }
             }
         })
 
+    }
+
+    fun updateProjectList() {
+        val db = FirebaseFirestore.getInstance().collection("Project")
+        val user = Firebase.auth.currentUser?.uid.toString()
+
+        db.addSnapshotListener { snapshots, error ->
+            if (error != null) {
+                return@addSnapshotListener
+            }
+
+            if (snapshots != null) {
+                projectList.clear()
+                for (document in snapshots) {
+                    val projectData = document.toObject(Project::class.java)
+                    if (selectedView == chipViews[0] && projectData.users.contains(user)) projectList.add(projectData)
+                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite) projectList.add(projectData)
+                }
+
+                projectShimmerLayout.stopShimmer()
+                projectShimmerLayout.visibility = GONE
+                projectRecyclerView.visibility = View.VISIBLE
+                projectAdapter.notifyDataSetChanged()
+
+                if (projectList.isEmpty()) {
+                    noResultsTv.visibility = View.VISIBLE
+                } else {
+                    noResultsTv.visibility = GONE
+                }
+            }
+        }
     }
 }

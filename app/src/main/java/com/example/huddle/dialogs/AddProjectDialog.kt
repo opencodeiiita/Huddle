@@ -224,6 +224,7 @@ class AddProjectDialog : DialogFragment() {
                 val userDocument = firestore.collection("Project").document()
 
                 val projectMap = hashMapOf(
+                    "projectId" to userDocument.id,
                     "projectDesc" to desc_edt.text.toString(),
                     "projectName" to name_edt.text.toString(),
                     "startDate" to start_date_edt.text.toString(),
@@ -238,7 +239,8 @@ class AddProjectDialog : DialogFragment() {
                         "completed" to 0,
                         "onGoing" to 0,
                         "upcoming" to 0
-                    )
+                    ),
+                    "favourite" to false
                 )
 
                 userDocument.set(projectMap)

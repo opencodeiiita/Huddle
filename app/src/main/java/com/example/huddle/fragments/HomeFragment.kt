@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -58,9 +59,11 @@ class HomeFragment : Fragment() {
 
         taskShimmerLayout = view.findViewById(R.id.task_shimmer_layout)
         taskShimmerLayout.startShimmer()
+        val noResultsTask = view.findViewById<TextView>(R.id.no_results_task)
 
         projectShimmerLayout = view.findViewById(R.id.project_shimmer_layout)
         projectShimmerLayout.startShimmer()
+        val noResultsProject = view.findViewById<TextView>(R.id.no_results_project)
 
         taskRecyclerView = view.findViewById(R.id.home_task_rv)
         taskRecyclerView.isNestedScrollingEnabled = false
@@ -93,11 +96,18 @@ class HomeFragment : Fragment() {
                         val task = document.toObject(Task::class.java)
                         if(task.users.contains(user)) taskList.add(task)
                     }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         taskShimmerLayout.stopShimmer()
                         taskShimmerLayout.visibility = View.GONE
                         taskAdapter.notifyDataSetChanged()
                         taskRecyclerView.visibility = View.VISIBLE
+
+                        if (taskList.isEmpty()) {
+                            noResultsTask.visibility = View.VISIBLE
+                        } else {
+                            noResultsTask.visibility = GONE
+                        }
                     }, 1000)
                 }
             }
@@ -114,11 +124,18 @@ class HomeFragment : Fragment() {
                         val task = document.toObject(Project::class.java)
                         if(task.users.contains(user)) projectList.add(task)
                     }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         projectShimmerLayout.stopShimmer()
-                        projectShimmerLayout.visibility = View.GONE
+                        projectShimmerLayout.visibility = GONE
                         projectAdapter.notifyDataSetChanged()
                         projectRecyclerView.visibility = View.VISIBLE
+
+                        if (projectList.isEmpty()) {
+                            noResultsProject.visibility = View.VISIBLE
+                        } else {
+                            noResultsProject.visibility = GONE
+                        }
                     }, 1000)
                 }
             }

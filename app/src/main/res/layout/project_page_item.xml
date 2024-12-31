@@ -74,6 +74,14 @@
 
             </com.google.android.material.card.MaterialCardView>
 
+            <ImageView
+                android:id="@+id/project_fav_iv"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:tint="@color/stroke"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/round_star_border_24"/>
+
         </LinearLayout>
 
         <LinearLayout
