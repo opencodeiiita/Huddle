@@ -1,21 +1,26 @@
 package com.example.huddle.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.data.User
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.firestore
 import de.hdodenhof.circleimageview.CircleImageView
 
-class UserAdapter(private val userList: List<User>,
-                  private val selectedUserIds: MutableSet<String>
-) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
+class AddChatAdapter(private val userList: List<User>, private val fragment: DialogFragment) : RecyclerView.Adapter<AddChatAdapter.UserViewHolder>() {
+    private fun dismissDialog() {
+        fragment.dismiss()
+    }
 
     inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val userNameTv: TextView = view.findViewById(R.id.user_name)
@@ -38,16 +43,27 @@ class UserAdapter(private val userList: List<User>,
                 .load(user.profile)
                 .into(holder.profileImage)
         }
-
-        if(selectedUserIds.contains(user.id))holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
+        val currentUser = Firebase.auth.currentUser?.uid
 
         holder.itemBg.setOnClickListener {
-            if (selectedUserIds.contains(user.id)) {
-                holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.background))
-                selectedUserIds.remove(user.id)
-            } else {
-                holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
-                selectedUserIds.add(user.id)
+            if (currentUser != null) {
+                val chatListRef = Firebase.firestore.collection("ChatList").document(currentUser)
+
+                chatListRef.get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            chatListRef.update("chatList", FieldValue.arrayUnion(user.id))
+                        } else {
+                            val chatListData = mapOf("chatList" to listOf(user.id))
+                            chatListRef.set(chatListData)
+                        }
+
+                        dismissDialog()
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.e("FireStore", "Error updating chat list", exception)
+                    }
+
             }
         }
     }
