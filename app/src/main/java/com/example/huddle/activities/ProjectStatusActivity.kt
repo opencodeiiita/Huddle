@@ -1,5 +1,6 @@
 package com.example.huddle.activities
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
@@ -12,6 +13,7 @@ import com.example.huddle.R
 import com.google.android.material.card.MaterialCardView
 
 class ProjectStatusActivity : AppCompatActivity() {
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,23 +52,23 @@ class ProjectStatusActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.onGoing_tv).text = "$onGoing Tasks are currently in progress."
         findViewById<TextView>(R.id.upcoming_tv).text = "$upcoming Tasks are scheduled to start."
 
-        val percent_upcoming = if(completed + onGoing + upcoming != 0) {
+        val percentUpcoming = if(completed + onGoing + upcoming != 0) {
             (upcoming.toDouble() / (completed.toDouble() + onGoing.toDouble() + upcoming.toDouble())*100).toInt()
         } else 0
 
-        val percent_onGoing = if(completed + onGoing + upcoming != 0) {
-            percent_upcoming + (onGoing.toDouble() / (completed.toDouble() + onGoing.toDouble() + upcoming.toDouble())*100).toInt()
+        val percentOnGoing = if(completed + onGoing + upcoming != 0) {
+            percentUpcoming + (onGoing.toDouble() / (completed.toDouble() + onGoing.toDouble() + upcoming.toDouble())*100).toInt()
         } else 0
 
-        val percent_completed = if(completed + onGoing + upcoming != 0) {
-            100 - percent_onGoing
+        val percentCompleted = if(completed + onGoing + upcoming != 0) {
+            100 - percentOnGoing
         } else 0
 
-        progress1.progress = if (percent_completed == 0) 0 else 100
-        progress2.progress = percent_onGoing
-        progress3.progress = percent_upcoming
+        progress1.progress = if (percentCompleted == 0) 0 else 100
+        progress2.progress = percentOnGoing
+        progress3.progress = percentUpcoming
 
-        findViewById<TextView>(R.id.percentageText).text = "${percent_completed}%"
+        findViewById<TextView>(R.id.percentageText).text = "${percentCompleted}%"
 
     }
 }

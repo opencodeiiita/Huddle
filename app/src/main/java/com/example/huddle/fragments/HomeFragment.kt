@@ -1,5 +1,6 @@
 package com.example.huddle.fragments
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -21,10 +22,7 @@ import com.example.huddle.data.Task
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
@@ -46,6 +44,7 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -53,7 +52,7 @@ class HomeFragment : Fragment() {
         val currentDate = LocalDate.now()
         val dayOfWeek = currentDate.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
         val dayOfMonth = currentDate.dayOfMonth
-        view.findViewById<TextView>(R.id.home_time_tv).setText("$dayOfWeek, $dayOfMonth")
+        view.findViewById<TextView>(R.id.home_time_tv).text = "$dayOfWeek, $dayOfMonth"
 
         val user = Firebase.auth.currentUser?.uid.toString()
 
@@ -99,7 +98,7 @@ class HomeFragment : Fragment() {
 
                     Handler(Looper.getMainLooper()).postDelayed({
                         taskShimmerLayout.stopShimmer()
-                        taskShimmerLayout.visibility = View.GONE
+                        taskShimmerLayout.visibility = GONE
                         taskAdapter.notifyDataSetChanged()
                         taskRecyclerView.visibility = View.VISIBLE
 

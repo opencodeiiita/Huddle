@@ -1,15 +1,12 @@
 package com.example.huddle.dialogs
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.DialogFragment
 import com.example.huddle.R
 import com.google.android.material.button.MaterialButton
@@ -38,6 +35,7 @@ class AddTaskDialog : DialogFragment() {
         return inflater.inflate(R.layout.dialog_add_task, container, false)
     }
 
+    @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -46,8 +44,8 @@ class AddTaskDialog : DialogFragment() {
             dialog?.dismiss()
         }
 
-        val date_edt = view.findViewById<TextInputEditText>(R.id.date_edt)
-        date_edt.setOnClickListener {
+        val dateEdt = view.findViewById<TextInputEditText>(R.id.date_edt)
+        dateEdt.setOnClickListener {
             val dialogs: MaterialDatePicker<*> =
                 MaterialDatePicker.Builder.datePicker().setTitleText("Select Date").build()
             dialogs.show(requireActivity().supportFragmentManager, "tag")
@@ -64,15 +62,15 @@ class AddTaskDialog : DialogFragment() {
                     val dateTime = LocalDateTime.parse(myDate, formatter)
                     val formatter1 =
                         DateTimeFormatter.ofPattern("MMMM d, yyyy")
-                    date_edt.setText(dateTime.format(formatter1))
+                    dateEdt.setText(dateTime.format(formatter1))
                 } else {
-                    date_edt.setText(myDate)
+                    dateEdt.setText(myDate)
                 }
             }
         }
 
-        val start_time_edt = view.findViewById<TextInputEditText>(R.id.start_time_edt)
-        start_time_edt.setOnClickListener {
+        val startTimeEdt = view.findViewById<TextInputEditText>(R.id.start_time_edt)
+        startTimeEdt.setOnClickListener {
             val dialogs = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setTitleText("Select Time")
@@ -89,12 +87,12 @@ class AddTaskDialog : DialogFragment() {
 
                 val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
                 val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
-                start_time_edt.setText(timeString)
+                startTimeEdt.setText(timeString)
             }
         }
 
-        val end_time_edt = view.findViewById<TextInputEditText>(R.id.end_time_edt)
-        end_time_edt.setOnClickListener {
+        val endTimeEdt = view.findViewById<TextInputEditText>(R.id.end_time_edt)
+        endTimeEdt.setOnClickListener {
             val dialogs = MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setTitleText("Select Time")
@@ -111,7 +109,7 @@ class AddTaskDialog : DialogFragment() {
 
                 val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
                 val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
-                end_time_edt.setText(timeString)
+                endTimeEdt.setText(timeString)
             }
         }
 

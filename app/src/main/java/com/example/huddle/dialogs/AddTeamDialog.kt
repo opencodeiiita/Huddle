@@ -1,29 +1,26 @@
 package com.example.huddle.dialogs
 
-import android.app.Activity
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.DialogFragment
 import com.example.huddle.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 
 class AddTeamDialog : DialogFragment() {
-    val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
+    private val pickMedia = registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
         if (uri != null) {
             view?.findViewById<ImageView>(R.id.add_team_logo_iv)?.setImageURI(uri)
         } else {
-            Log.d("PhotoPicker", "No media selected");
+            Log.d("PhotoPicker", "No media selected")
         }
     }
 

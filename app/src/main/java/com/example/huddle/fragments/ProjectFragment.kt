@@ -1,5 +1,6 @@
 package com.example.huddle.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,6 +26,7 @@ import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
+@Suppress("NAME_SHADOWING")
 class ProjectFragment : Fragment() {
     private lateinit var projectRecyclerView: RecyclerView
     private lateinit var projectShimmerLayout: ShimmerFrameLayout
@@ -90,6 +92,7 @@ class ProjectFragment : Fragment() {
             TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            @SuppressLint("NotifyDataSetChanged")
             override fun afterTextChanged(s: Editable?) {
                 val query = s.toString().trim()
                 if (query.isNotEmpty()) {
@@ -127,6 +130,7 @@ class ProjectFragment : Fragment() {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateProjectList() {
         val db = FirebaseFirestore.getInstance().collection("Project")
         val user = Firebase.auth.currentUser?.uid.toString()

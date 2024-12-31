@@ -1,6 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.huddle.fragments
 
-
+import android.annotation.SuppressLint
 import android.widget.RelativeLayout
 import com.example.huddle.activities.SettingsActivity
 import android.content.Intent
@@ -34,6 +36,7 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,7 +82,6 @@ class ProfileFragment : Fragment() {
                 profileEmailTv.text = "No Data Found"
             }
         }
-
 
         //Temporary SIGN OUT Button
         view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {

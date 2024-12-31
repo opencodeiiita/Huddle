@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.huddle.fragments
 
 import android.app.Activity
@@ -33,7 +35,7 @@ import com.google.firebase.auth.auth
 import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "NAME_SHADOWING")
 class SignUpFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -63,24 +65,24 @@ class SignUpFragment : Fragment() {
                 parentFragmentManager.popBackStack()
             }
 
-        val email_edt = view.findViewById<TextInputEditText>(R.id.sign_up_email_edt)
-        val password_edt = view.findViewById<TextInputEditText>(R.id.sign_up_password_edt)
-        val name_edt = view.findViewById<TextInputEditText>(R.id.sign_up_name_edt)
+        val emailEdt = view.findViewById<TextInputEditText>(R.id.sign_up_email_edt)
+        val passwordEdt = view.findViewById<TextInputEditText>(R.id.sign_up_password_edt)
+        val nameEdt = view.findViewById<TextInputEditText>(R.id.sign_up_name_edt)
 
         view.findViewById<MaterialButton>(R.id.sign_up_btn)?.setOnClickListener {
-            if (email_edt.text?.isEmpty() == true || password_edt.text?.isEmpty() == true || name_edt.text?.isEmpty() == true) {
+            if (emailEdt.text?.isEmpty() == true || passwordEdt.text?.isEmpty() == true || nameEdt.text?.isEmpty() == true) {
                 Toast.makeText(
                     context,
                     "Something went wrong. Please check your details",
                     Toast.LENGTH_LONG
                 ).show()
-            } else if (password_edt.text?.isEmpty() == false && password_edt.text?.length!! < 8) {
+            } else if (passwordEdt.text?.isEmpty() == false && passwordEdt.text?.length!! < 8) {
                 Toast.makeText(
                     context,
                     "Password must be at least 8 characters long",
                     Toast.LENGTH_LONG
                 ).show()
-            } else if(!password_edt.text.toString().isStrongPassword()){
+            } else if(!passwordEdt.text.toString().isStrongPassword()){
                 val passDialog = MaterialAlertDialogBuilder(view.context)
                     .setTitle("Password Strength")
                     .setMessage("Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character.")
@@ -94,8 +96,8 @@ class SignUpFragment : Fragment() {
                 progressDialog.show()
 
                 auth.createUserWithEmailAndPassword(
-                    email_edt?.text.toString(),
-                    password_edt?.text.toString()
+                    emailEdt?.text.toString(),
+                    passwordEdt?.text.toString()
                 )
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -107,7 +109,7 @@ class SignUpFragment : Fragment() {
                             val userMap = hashMapOf(
                                 "id" to user?.uid.toString(),
                                 "email" to user?.email.toString(),
-                                "name" to name_edt.text.toString(),
+                                "name" to nameEdt.text.toString(),
                                 "profile" to "null"
                             )
 
@@ -272,7 +274,7 @@ class SignUpFragment : Fragment() {
                     hashMap["profile"] = user?.photoUrl.toString()
 
                     myRef.setValue(hashMap)
-                        .addOnCompleteListener({ task1 ->
+                        .addOnCompleteListener { task1 ->
                             if (task1.isSuccessful) {
                                 startActivity(Intent(activity, OnBoardingActivity::class.java))
                                 activity?.finish()
@@ -286,7 +288,7 @@ class SignUpFragment : Fragment() {
                                 user?.delete()
                                 progressDialog.dismiss()
                             }
-                        })
+                        }
                 }
                 .addOnFailureListener { e ->
                     progressDialog.dismiss()
