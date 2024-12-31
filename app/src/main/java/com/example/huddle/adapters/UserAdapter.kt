@@ -6,23 +6,21 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.data.User
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
+import de.hdodenhof.circleimageview.CircleImageView
 
 class UserAdapter(private val userList: List<User>,
                   private val selectedUserIds: MutableSet<String>
 ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
     inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val user_name_tv = view.findViewById<TextView>(R.id.user_name)
-        val user_email_tv = view.findViewById<TextView>(R.id.user_email)
-        val profile_image = view.findViewById<de.hdodenhof.circleimageview.CircleImageView>(R.id.profile_image)
-        val item_bg = view.findViewById<ConstraintLayout>(R.id.user_item_bg)
+        val userNameTv: TextView = view.findViewById(R.id.user_name)
+        val userEmailTv: TextView = view.findViewById(R.id.user_email)
+        val profileImage: CircleImageView = view.findViewById(R.id.profile_image)
+        val itemBg: ConstraintLayout = view.findViewById(R.id.user_item_bg)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -32,22 +30,22 @@ class UserAdapter(private val userList: List<User>,
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         val user = userList[position]
-        holder.user_name_tv.text = user.name
-        holder.user_email_tv.text = user.email
-        if (!user.profile.isNullOrEmpty() && user.profile != "null") {
+        holder.userNameTv.text = user.name
+        holder.userEmailTv.text = user.email
+        if (user.profile.isNotEmpty() && user.profile != "null") {
             Glide.with(holder.itemView.context)
                 .load(user.profile)
-                .into(holder.profile_image)
+                .into(holder.profileImage)
         }
 
-        if(selectedUserIds.contains(user.id))holder.item_bg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
+        if(selectedUserIds.contains(user.id))holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
 
-        holder.item_bg.setOnClickListener {
+        holder.itemBg.setOnClickListener {
             if (selectedUserIds.contains(user.id)) {
-                holder.item_bg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.background))
+                holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.background))
                 selectedUserIds.remove(user.id)
             } else {
-                holder.item_bg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
+                holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
                 selectedUserIds.add(user.id)
             }
         }

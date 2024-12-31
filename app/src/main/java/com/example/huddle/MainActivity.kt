@@ -8,9 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.huddle.activities.BaseHomeActivity
 import com.example.huddle.activities.LoginActivity
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.auth
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,13 +21,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
-
         val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
-
         setThemeMode(isNightMode)
 
         val currentUser = FirebaseAuth.getInstance().currentUser
-
         if (currentUser != null) startActivity(Intent(this, BaseHomeActivity::class.java))
         else startActivity(Intent(this, LoginActivity::class.java))
 

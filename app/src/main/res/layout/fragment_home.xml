@@ -109,6 +109,16 @@
 
             </RelativeLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="164dp"
+                android:text="No Results Found."
+                android:textColor="@color/text_sec"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:id="@+id/no_results_project"/>
+
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/project_shimmer_layout"
                 android:layout_width="match_parent"
@@ -189,6 +199,16 @@
                     android:src="@drawable/baseline_arrow_back_ios_new_24"/>
 
             </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:text="No Results Found."
+                android:textColor="@color/text_sec"
+                android:textSize="16sp"
+                android:visibility="gone"
+                android:gravity="center"
+                android:id="@+id/no_results_task"/>
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/task_shimmer_layout"

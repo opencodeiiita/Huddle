@@ -32,10 +32,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.OAuthProvider
 import com.google.firebase.auth.auth
-import com.google.firebase.database.database
 import com.google.firebase.firestore.FirebaseFirestore
 
-@Suppress("DEPRECATION")
+@Suppress("DEPRECATION", "NAME_SHADOWING")
 class LoginFragment : Fragment() {
     private lateinit var auth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -60,11 +59,11 @@ class LoginFragment : Fragment() {
 
         progressDialog = dialogBuilder.create()
 
-        val email_edt = view.findViewById<TextInputEditText>(R.id.sign_in_email_edt)
-        val password_edt = view.findViewById<TextInputEditText>(R.id.sign_in_password_edt)
+        val emailEdt = view.findViewById<TextInputEditText>(R.id.sign_in_email_edt)
+        val passwordEdt = view.findViewById<TextInputEditText>(R.id.sign_in_password_edt)
 
         view.findViewById<MaterialButton>(R.id.sign_in_btn)?.setOnClickListener {
-            if (email_edt.text?.isEmpty() == true || password_edt.text?.isEmpty() == true) {
+            if (emailEdt.text?.isEmpty() == true || passwordEdt.text?.isEmpty() == true) {
                 Toast.makeText(
                     context,
                     "Something went wrong. Please check your details",
@@ -72,7 +71,7 @@ class LoginFragment : Fragment() {
             } else {
                 progressDialog.show()
 
-                auth.signInWithEmailAndPassword(email_edt.text.toString(), password_edt.text.toString()).addOnCompleteListener { task ->
+                auth.signInWithEmailAndPassword(emailEdt.text.toString(), passwordEdt.text.toString()).addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         startActivity(Intent(activity, BaseHomeActivity::class.java))
                         activity?.finish()

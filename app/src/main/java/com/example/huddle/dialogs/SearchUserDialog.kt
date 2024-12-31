@@ -1,6 +1,6 @@
 package com.example.huddle.dialogs
 
-import android.app.Activity
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.text.Editable
@@ -8,9 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,7 +24,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
 class SearchUserDialog : DialogFragment() {
-    private lateinit var user_rv: RecyclerView
+    private lateinit var userRv: RecyclerView
     private val userList = mutableListOf<User>()
     private lateinit var userAdapter: UserAdapter
     private var selectedUserIds = mutableSetOf<String>()
@@ -58,6 +56,7 @@ class SearchUserDialog : DialogFragment() {
         return inflater.inflate(R.layout.dialog_search_user, container, false)
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -68,10 +67,10 @@ class SearchUserDialog : DialogFragment() {
 
         selectedUserIds = arguments?.getStringArrayList(ARG_STRING_LIST)?.toMutableSet() ?: mutableSetOf()
 
-        user_rv = view.findViewById(R.id.user_rv)
-        user_rv.layoutManager = LinearLayoutManager(requireContext())
+        userRv = view.findViewById(R.id.user_rv)
+        userRv.layoutManager = LinearLayoutManager(requireContext())
         userAdapter = UserAdapter(userList, selectedUserIds)
-        user_rv.adapter = userAdapter
+        userRv.adapter = userAdapter
 
         val user = Firebase.auth.currentUser
 

@@ -1,6 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.huddle.fragments
 
-
+import android.annotation.SuppressLint
 import android.widget.RelativeLayout
 import com.example.huddle.activities.SettingsActivity
 import android.content.Intent
@@ -11,6 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.huddle.R
@@ -33,6 +36,7 @@ class ProfileFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_profile, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -79,7 +83,6 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
         //Temporary SIGN OUT Button
         view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {
             Firebase.auth.signOut()
@@ -96,6 +99,11 @@ class ProfileFragment : Fragment() {
                 googleSignInClient.signOut()
                 googleSignInClient.revokeAccess()
             }
+
+            val navSp = activity?.getSharedPreferences("navigation", MODE_PRIVATE)
+            val editor = navSp?.edit()
+            editor?.putString("nav_item", "Home")
+            editor?.apply()
 
             activity?.finish()
             startActivity(Intent(context, LoginActivity::class.java))

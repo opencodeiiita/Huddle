@@ -1,11 +1,13 @@
 package com.example.huddle.fragments
 
+import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
@@ -20,10 +22,7 @@ import com.example.huddle.data.Task
 import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.coroutines.delay
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.Locale
@@ -45,6 +44,7 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    @SuppressLint("NotifyDataSetChanged", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,15 +52,17 @@ class HomeFragment : Fragment() {
         val currentDate = LocalDate.now()
         val dayOfWeek = currentDate.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
         val dayOfMonth = currentDate.dayOfMonth
-        view.findViewById<TextView>(R.id.home_time_tv).setText("$dayOfWeek, $dayOfMonth")
+        view.findViewById<TextView>(R.id.home_time_tv).text = "$dayOfWeek, $dayOfMonth"
 
         val user = Firebase.auth.currentUser?.uid.toString()
 
         taskShimmerLayout = view.findViewById(R.id.task_shimmer_layout)
         taskShimmerLayout.startShimmer()
+        val noResultsTask = view.findViewById<TextView>(R.id.no_results_task)
 
         projectShimmerLayout = view.findViewById(R.id.project_shimmer_layout)
         projectShimmerLayout.startShimmer()
+        val noResultsProject = view.findViewById<TextView>(R.id.no_results_project)
 
         taskRecyclerView = view.findViewById(R.id.home_task_rv)
         taskRecyclerView.isNestedScrollingEnabled = false
@@ -93,11 +95,18 @@ class HomeFragment : Fragment() {
                         val task = document.toObject(Task::class.java)
                         if(task.users.contains(user)) taskList.add(task)
                     }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         taskShimmerLayout.stopShimmer()
-                        taskShimmerLayout.visibility = View.GONE
+                        taskShimmerLayout.visibility = GONE
                         taskAdapter.notifyDataSetChanged()
                         taskRecyclerView.visibility = View.VISIBLE
+
+                        if (taskList.isEmpty()) {
+                            noResultsTask.visibility = View.VISIBLE
+                        } else {
+                            noResultsTask.visibility = GONE
+                        }
                     }, 1000)
                 }
             }
@@ -114,11 +123,18 @@ class HomeFragment : Fragment() {
                         val task = document.toObject(Project::class.java)
                         if(task.users.contains(user)) projectList.add(task)
                     }
+
                     Handler(Looper.getMainLooper()).postDelayed({
                         projectShimmerLayout.stopShimmer()
-                        projectShimmerLayout.visibility = View.GONE
+                        projectShimmerLayout.visibility = GONE
                         projectAdapter.notifyDataSetChanged()
                         projectRecyclerView.visibility = View.VISIBLE
+
+                        if (projectList.isEmpty()) {
+                            noResultsProject.visibility = View.VISIBLE
+                        } else {
+                            noResultsProject.visibility = GONE
+                        }
                     }, 1000)
                 }
             }
