@@ -10,15 +10,14 @@
     <color name="white">#FFFFFFFF</color>
 
     //Brand Colors
-    <color name="background">#0a0c16</color>
+    <color name="background">#f5fbff</color>
     <color name="accent">#3580ff</color>
-    <color name="text_sec">#B3FFFFFF</color>
-    <color name="stroke">#73FFFFFF</color>
-    <color name="stroke_light">#1AFFFFFF</color>
-    <color name="blue">#5F93E1</color>
-    <color name="text_main">#ffffff</color>
+    <color name="text_sec">#B3000000</color>
+    <color name="stroke">#73000000</color>
+    <color name="stroke_light">#1A000000</color>
+    <color name="text_main">#000000</color>
     <color name="transparent">#00FFFFFF</color>
-    <color name="accent_sec">#132445</color>
+    <color name="accent_sec">#B1CFFF</color>
 
     <color name="label_green">#4CAF50</color>
     <color name="circle_yellow">#ffb35a</color>

@@ -20,6 +20,7 @@
             android:layout_margin="20dp"
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
+            app:strokeColor="@color/stroke_light"
             app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -331,7 +332,7 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="32dp"
                 android:text="Save"
-                android:textColor="@color/text_main"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 app:cornerRadius="16dp" />
 

@@ -1,13 +1,18 @@
 package com.example.huddle.dialogs
 
+import android.app.Activity
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.ImageView
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
 import androidx.fragment.app.DialogFragment
 import com.example.huddle.R
 import com.google.android.material.button.MaterialButton
@@ -35,11 +40,12 @@ class AddTeamDialog : DialogFragment() {
         return inflater.inflate(R.layout.dialog_add_team, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<MaterialCardView>(R.id.add_team_image_cv).setOnClickListener {
-            pickMedia?.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
         }
 
         view.findViewById<MaterialCardView>(R.id.dialog_add_team_back).setOnClickListener {

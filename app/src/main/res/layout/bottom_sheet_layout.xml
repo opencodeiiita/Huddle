@@ -14,6 +14,7 @@
         android:layout_width="40dp"
         android:layout_height="4dp"
         android:layout_marginTop="8dp"
+        app:cardElevation="0dp"
         android:layout_gravity="center"
         app:cardCornerRadius="2dp"
         android:background="@color/stroke"/>
@@ -30,6 +31,7 @@
             android:id="@+id/imageViewSearch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/text_main"
             android:layout_centerVertical="true"
             android:src="@drawable/edit_square" />
 
@@ -57,6 +59,7 @@
             android:id="@+id/imageViewCreateProject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/text_main"
             android:layout_centerVertical="true"
             android:src="@drawable/plus_button" />
 
@@ -85,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            app:tint="@color/text_main"
             android:src="@drawable/three_users" />
 
         <TextView
@@ -111,6 +115,7 @@
             android:id="@+id/imageViewCreateEvent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:tint="@color/text_main"
             android:layout_centerVertical="true"
             android:src="@drawable/time_circle" />
 
@@ -147,7 +152,7 @@
             android:contentDescription="@string/app_name"
             android:padding="8dp"
             android:src="@drawable/baseline_close_24"
-            app:tint="@color/text_main"/>
+            app:tint="@color/white"/>
 
     </com.google.android.material.card.MaterialCardView>
 

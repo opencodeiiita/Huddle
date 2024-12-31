@@ -21,6 +21,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="20dp"
+            app:strokeColor="@color/stroke_light"
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
@@ -58,6 +59,7 @@
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
+            app:strokeColor="@color/stroke_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -134,7 +136,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="65%"
-                android:textColor="@color/white"
+                android:textColor="@color/text_main"
                 android:textSize="36sp" />
 
             <TextView
@@ -165,6 +167,7 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
             app:cardBackgroundColor="@color/circle_green"/>
 
         <TextView
@@ -179,6 +182,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="10dp"
             android:layout_height="10dp"
+            app:cardElevation="0dp"
             app:cardCornerRadius="5dp"
             app:cardBackgroundColor="@color/circle_yellow"/>
 
@@ -195,6 +199,7 @@
             android:layout_width="10dp"
             android:layout_height="10dp"
             app:cardCornerRadius="5dp"
+            app:cardElevation="0dp"
             app:cardBackgroundColor="@color/accent"/>
 
         <TextView
@@ -212,7 +217,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:background="@drawable/outlined_completed_box"
+        android:background="@drawable/outlined_search_box"
         android:gravity="center_vertical"
         android:layout_marginTop="32dp"
         android:orientation="horizontal"

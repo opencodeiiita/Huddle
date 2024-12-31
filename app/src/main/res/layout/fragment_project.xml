@@ -35,6 +35,7 @@
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
+            app:strokeColor="@color/stroke_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">

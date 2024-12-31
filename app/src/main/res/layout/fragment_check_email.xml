@@ -27,6 +27,7 @@
             android:id="@+id/fragment_check_email_back"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            app:strokeColor="@color/stroke_light"
             android:layout_margin="20dp"
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
@@ -139,7 +140,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="32dp"
             android:text="Verify code"
-            android:textColor="@color/text_main"
+            android:textColor="@color/white"
             android:textSize="18sp"
             app:cornerRadius="16dp" />
 

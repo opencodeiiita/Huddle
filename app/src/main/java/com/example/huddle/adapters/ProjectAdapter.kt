@@ -1,5 +1,6 @@
 package com.example.huddle.adapters
 
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import androidx.core.view.marginStart
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.huddle.R
+import com.example.huddle.activities.ProjectStatusActivity
 import com.example.huddle.data.Project
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -60,8 +62,30 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
             holder.project_card_parent.layoutParams = layoutParams
         }
 
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ProjectStatusActivity::class.java)
+            intent.putExtra("completed", project.taskDetails["completed"])
+            intent.putExtra("upcoming", project.taskDetails["upcoming"])
+            intent.putExtra("onGoing", project.taskDetails["onGoing"])
+            holder.itemView.context.startActivity(intent)
+        }
+
         val color = Color.parseColor(project.color)
-        holder.project_card_parent.setCardBackgroundColor(color)
+        if(project.color == "#0a0c16") {
+            holder.project_card_parent.setCardBackgroundColor(
+                ContextCompat.getColor(
+                    holder.itemView.context,
+                    R.color.background
+                )
+            )
+        } else {
+            holder.project_card_parent.setCardBackgroundColor(color)
+            holder.project_name_tv.setTextColor(Color.WHITE)
+            holder.project_desc_tv.setTextColor(Color.WHITE)
+            holder.project_progress_tv.setTextColor(Color.WHITE)
+            holder.project_progress_parent.setTextColor(Color.WHITE)
+            holder.project_progress_pi.setIndicatorColor(Color.WHITE)
+        }
 
         if (project.totalTask == 0) {
             holder.project_progress_pi.visibility = View.GONE

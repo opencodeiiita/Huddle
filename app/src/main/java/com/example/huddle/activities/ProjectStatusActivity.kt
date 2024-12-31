@@ -1,7 +1,10 @@
 package com.example.huddle.activities
 
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -9,6 +12,7 @@ import com.example.huddle.R
 import com.google.android.material.card.MaterialCardView
 
 class ProjectStatusActivity : AppCompatActivity() {
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_project_status)
@@ -20,6 +24,18 @@ class ProjectStatusActivity : AppCompatActivity() {
 
         findViewById<MaterialCardView>(R.id.activity_project_status_back).setOnClickListener {
             finish()
+        }
+
+        val sharedPreferences = getSharedPreferences("ThemePrefs", MODE_PRIVATE)
+        val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
+
+        val window = window
+        if (isNightMode) {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(0, APPEARANCE_LIGHT_STATUS_BARS)
+        } else {
+            window.decorView.windowInsetsController?.setSystemBarsAppearance(
+                APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS
+            )
         }
 
         val progress1 = findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.progressCircle)

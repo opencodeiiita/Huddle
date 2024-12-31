@@ -24,6 +24,7 @@
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
             app:cardElevation="0dp"
+            app:strokeColor="@color/stroke_light"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -114,7 +115,7 @@
         android:layout_marginVertical="20dp"
         android:layout_gravity="center_horizontal"
         android:text="Done"
-        android:textColor="@color/text_main"
+        android:textColor="@color/white"
         android:textSize="18sp"
         app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
