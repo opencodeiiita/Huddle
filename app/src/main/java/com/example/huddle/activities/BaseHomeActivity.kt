@@ -3,6 +3,7 @@ package com.example.huddle.activities
 import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -23,6 +24,10 @@ import com.example.huddle.fragments.ProfileFragment
 import com.example.huddle.fragments.ProjectFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.firestore
 
 class BaseHomeActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
@@ -163,5 +168,20 @@ class BaseHomeActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.window?.attributes?.windowAnimations = R.style.DialogAnimation
         dialog.window?.setGravity(Gravity.BOTTOM)
+    }
+
+    private fun status(status: Long) {
+        val user = Firebase.auth.currentUser?.uid.toString()
+        Firebase.firestore.collection("users").document(user).update("lastSeen", status)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        status(0)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        status(Calendar.getInstance().timeInMillis)
     }
 }

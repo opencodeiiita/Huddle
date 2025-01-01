@@ -110,7 +110,8 @@ class SignUpFragment : Fragment() {
                                 "id" to user?.uid.toString(),
                                 "email" to user?.email.toString(),
                                 "name" to nameEdt.text.toString(),
-                                "profile" to "null"
+                                "profile" to "null",
+                                "lastSeen" to 0
                             )
 
                             userDocument.set(userMap)
@@ -193,7 +194,8 @@ class SignUpFragment : Fragment() {
                         "id" to user?.uid.toString(),
                         "email" to user?.email.toString(),
                         "name" to user?.displayName.toString(),
-                        "profile" to user?.photoUrl.toString()
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
                     )
 
                     userDocument.set(userMap)
@@ -236,7 +238,8 @@ class SignUpFragment : Fragment() {
                         "id" to user?.uid.toString(),
                         "email" to user?.email.toString(),
                         "name" to user?.displayName.toString(),
-                        "profile" to user?.photoUrl.toString()
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
                     )
 
                     userDocument.set(userMap)
@@ -267,11 +270,13 @@ class SignUpFragment : Fragment() {
                     val database = Firebase.database
                     val myRef = database.getReference("user").child(user?.uid.toString())
 
-                    val hashMap = HashMap<String, String>()
-                    hashMap["id"] = user?.uid.toString()
-                    hashMap["email"] = user?.email.toString()
-                    hashMap["name"] = user?.displayName.toString()
-                    hashMap["profile"] = user?.photoUrl.toString()
+                    val hashMap = hashMapOf(
+                        "id" to user?.uid.toString(),
+                        "email" to user?.email.toString(),
+                        "name" to user?.displayName.toString(),
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
+                    )
 
                     myRef.setValue(hashMap)
                         .addOnCompleteListener { task1 ->

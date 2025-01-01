@@ -181,7 +181,8 @@ class LoginFragment : Fragment() {
                         "id" to user?.uid.toString(),
                         "email" to user?.email.toString(),
                         "name" to user?.displayName.toString(),
-                        "profile" to user?.photoUrl.toString()
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
                     )
 
                     userDocument.set(userMap)
@@ -217,7 +218,8 @@ class LoginFragment : Fragment() {
                         "id" to user?.uid.toString(),
                         "email" to user?.email.toString(),
                         "name" to user?.displayName.toString(),
-                        "profile" to user?.photoUrl.toString()
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
                     )
 
                     userDocument.set(userMap)
@@ -259,7 +261,8 @@ class LoginFragment : Fragment() {
                         "id" to user?.uid.toString(),
                         "email" to user?.email.toString(),
                         "name" to user?.displayName.toString(),
-                        "profile" to user?.photoUrl.toString()
+                        "profile" to user?.photoUrl.toString(),
+                        "lastSeen" to 0
                     )
 
                     userDocument.set(userMap)
