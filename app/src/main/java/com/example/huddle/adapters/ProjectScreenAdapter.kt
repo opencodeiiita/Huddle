@@ -17,6 +17,7 @@ import com.example.huddle.data.Project
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.firebase.Firebase
+import com.google.firebase.auth.auth
 import com.google.firebase.firestore.firestore
 import kotlin.math.min
 
@@ -65,7 +66,9 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
         memberList.addAll(project.users.subList(0, memberCount))
         memberAdapter.notifyItemRangeInserted(memberList.size - memberCount, memberCount)
 
-        if(project.favourite) {
+        val currentUser = Firebase.auth.currentUser?.uid
+
+        if(project.favourite.contains(currentUser)) {
             holder.projectFavIv.setImageResource(R.drawable.round_star_24)
             holder.projectFavIv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.circle_yellow))
         } else {
@@ -74,16 +77,18 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
         }
 
         holder.projectFavIv.setOnClickListener {
-            if(project.favourite) {
-                project.favourite = false
+            if(project.favourite.contains(currentUser)) {
+                project.favourite.remove(currentUser)
                 holder.projectFavIv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.stroke))
                 holder.projectFavIv.setImageResource(R.drawable.round_star_border_24)
-                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", false)
+                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", project.favourite)
             } else {
-                project.favourite = true
+                if (currentUser != null) {
+                    project.favourite.add(currentUser)
+                }
                 holder.projectFavIv.setImageResource(R.drawable.round_star_24)
                 holder.projectFavIv.setColorFilter(ContextCompat.getColor(holder.itemView.context, R.color.circle_yellow))
-                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", true)
+                Firebase.firestore.collection("Project").document(project.projectId).update("favourite", project.favourite)
             }
         }
 

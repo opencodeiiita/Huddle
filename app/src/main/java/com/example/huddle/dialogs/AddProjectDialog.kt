@@ -233,7 +233,7 @@ class AddProjectDialog : DialogFragment() {
                         "onGoing" to 0,
                         "upcoming" to 0
                     ),
-                    "favourite" to false
+                    "favourite" to emptyList<String>()
                 )
 
                 userDocument.set(projectMap)

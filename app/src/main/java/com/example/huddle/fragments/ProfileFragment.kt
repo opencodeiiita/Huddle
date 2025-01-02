@@ -25,6 +25,7 @@ import com.google.android.material.button.MaterialButton
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 
 class ProfileFragment : Fragment() {
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -85,6 +86,7 @@ class ProfileFragment : Fragment() {
 
         //Temporary SIGN OUT Button
         view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {
+            Firebase.firestore.collection("users").document(user?.uid.toString()).update("lastSeen", System.currentTimeMillis())
             Firebase.auth.signOut()
 
             if(Firebase.auth.currentUser?.providerId.equals("google.com")){

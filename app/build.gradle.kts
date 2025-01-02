@@ -74,5 +74,7 @@ dependencies {
     implementation(libs.shimmer)
     //Circle Image View
     implementation(libs.circleimageview)
+    //Emoji View
+    implementation(libs.emoji.google.compat)
 
 }

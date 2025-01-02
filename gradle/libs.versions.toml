@@ -6,6 +6,7 @@ blurLayout = "1.1.1"
 blurrylayout = "2.0.0"
 blurview = "1.6.6"
 coreSplashscreen = "1.0.1"
+emojiAndroidxEmoji2 = "0.21.0"
 glide = "4.15.1"
 kotlin = "2.0.0"
 coreKtx = "1.10.1"
@@ -38,6 +39,8 @@ animatedpieview = { module = "com.github.razerdp:AnimatedPieView", version.ref =
 blur-layout = { module = "com.avito.android:blur-layout", version.ref = "blurLayout" }
 blurrylayout = { module = "com.revosleap.layout:blurrylayout", version.ref = "blurrylayout" }
 blurview = { module = "com.eightbitlab:blurview", version.ref = "blurview" }
+emoji-androidx-emoji2 = { module = "com.vanniktech:emoji-androidx-emoji2", version.ref = "emojiAndroidxEmoji2" }
+emoji-google-compat = { module = "com.vanniktech:emoji-google-compat", version.ref = "emojiAndroidxEmoji2" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
