@@ -1,6 +1,7 @@
 package com.example.huddle.adapters
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +10,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
+import com.example.huddle.activities.ChatActivity
+import com.example.huddle.utility.getTimeAgo
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Locale
 
 class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter<ChatListAdapter.UserViewHolder>() {
@@ -40,6 +42,12 @@ class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter
 
         holder.userNameTv.text = "Loading..."
         holder.userEmailTv.text = "Loading..."
+
+        holder.itemBg.setOnClickListener {
+            val intent = Intent(holder.itemView.context, ChatActivity::class.java)
+            intent.putExtra("id", user)
+            holder.itemView.context.startActivity(intent)
+        }
 
         userDocument.addSnapshotListener { documentSnapshot, error ->
             if (error != null) {
@@ -73,22 +81,6 @@ class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter
             } else {
                 holder.userNameTv.text = "No Data Found"
                 holder.userEmailTv.text = "No Data Found"
-            }
-        }
-    }
-
-    private fun getTimeAgo(timeInMillis: Long): String {
-        val now = System.currentTimeMillis()
-        val diff = now - timeInMillis
-
-        return when {
-            diff < 60 * 1000 -> "Active Recently"
-            diff < 60 * 60 * 1000 -> "Active ${diff / (60 * 1000)}m ago"
-            diff < 24 * 60 * 60 * 1000 -> "Active ${diff / (60 * 60 * 1000)}h ago"
-            diff < 7 * 24 * 60 * 60 * 1000 -> "Active ${diff / (24 * 60 * 60 * 1000)}d ago"
-            else -> {
-                val dateFormat = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
-                dateFormat.format(timeInMillis)
             }
         }
     }

@@ -110,7 +110,7 @@ class ProjectFragment : Fragment() {
                                 for (document in snapshots) {
                                     val projectData = document.toObject(Project::class.java)
                                     if (selectedView == chipViews[0] && projectData.users.contains(user)) projectList.add(projectData)
-                                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite) projectList.add(projectData)
+                                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite.contains(user)) projectList.add(projectData)
                                 }
 
                                 if (projectList.isEmpty()) {
@@ -145,7 +145,7 @@ class ProjectFragment : Fragment() {
                 for (document in snapshots) {
                     val projectData = document.toObject(Project::class.java)
                     if (selectedView == chipViews[0] && projectData.users.contains(user)) projectList.add(projectData)
-                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite) projectList.add(projectData)
+                    else if (selectedView == chipViews[2] && projectData.users.contains(user) && projectData.favourite.contains(user)) projectList.add(projectData)
                 }
 
                 projectShimmerLayout.stopShimmer()

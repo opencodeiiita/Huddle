@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="background">#0a0c16</color>
+    <color name="background_sec">#212638</color>
     <color name="accent">#3580ff</color>
     <color name="text_sec">#B3FFFFFF</color>
     <color name="stroke">#73FFFFFF</color>

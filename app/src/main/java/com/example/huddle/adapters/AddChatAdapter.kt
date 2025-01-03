@@ -1,5 +1,6 @@
 package com.example.huddle.adapters
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
+import com.example.huddle.activities.ChatActivity
 import com.example.huddle.data.User
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
@@ -58,12 +60,30 @@ class AddChatAdapter(private val userList: List<User>, private val fragment: Dia
                             chatListRef.set(chatListData)
                         }
 
-                        dismissDialog()
                     }
                     .addOnFailureListener { exception ->
                         Log.e("FireStore", "Error updating chat list", exception)
                     }
 
+                val chatListRef2 = Firebase.firestore.collection("ChatList").document(user.id)
+
+                chatListRef2.get()
+                    .addOnSuccessListener { document ->
+                        if (document.exists()) {
+                            chatListRef2.update("chatList", FieldValue.arrayUnion(currentUser))
+                        } else {
+                            val chatListData = mapOf("chatList" to listOf(currentUser))
+                            chatListRef2.set(chatListData)
+                        }
+
+                        val intent = Intent(holder.itemView.context, ChatActivity::class.java)
+                        intent.putExtra("id", user.id)
+                        holder.itemView.context.startActivity(intent)
+                        dismissDialog()
+                    }
+                    .addOnFailureListener { exception ->
+                        Log.e("FireStore", "Error updating chat list", exception)
+                    }
             }
         }
     }
