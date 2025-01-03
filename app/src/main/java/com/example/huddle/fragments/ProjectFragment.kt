@@ -46,6 +46,7 @@ class ProjectFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //Shimmer Layout for Project Fragment
         projectShimmerLayout = view.findViewById(R.id.project_shimmer_layout)
         projectShimmerLayout.startShimmer()
 
