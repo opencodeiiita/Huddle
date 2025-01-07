@@ -61,9 +61,7 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ProjectStatusActivity::class.java)
-            intent.putExtra("completed", project.taskDetails["completed"])
-            intent.putExtra("upcoming", project.taskDetails["upcoming"])
-            intent.putExtra("onGoing", project.taskDetails["onGoing"])
+            intent.putExtra("id", project.projectId)
             holder.itemView.context.startActivity(intent)
         }
 
@@ -84,14 +82,14 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
             holder.projectProgressPi.setIndicatorColor(Color.WHITE)
         }
 
-        if (project.totalTask == 0) {
+        if (project.tasks.isEmpty()) {
             holder.projectProgressPi.visibility = View.GONE
             holder.projectProgressTv.text = "No Tasks"
             holder.projectProgressParent.text = "Coasts"
             holder.projectProgressParent.visibility = View.INVISIBLE
         } else {
-            holder.projectProgressTv.text = "${project.projectProgress}/${project.totalTask}"
-            val final = (project.projectProgress.toFloat() / project.totalTask.toFloat()) * 100.0
+            holder.projectProgressTv.text = "${project.tasks.size} Tasks"
+            val final = 1 * 100.0
             holder.projectProgressPi.progress = final.toInt()
         }
         holder.projectNameTv.text = project.projectName

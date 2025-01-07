@@ -86,4 +86,11 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <CheckBox
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:visibility="gone"
+        android:layout_marginStart="16dp"
+        android:id="@+id/check_box_task"/>
+
 </LinearLayout>

@@ -224,15 +224,9 @@ class AddProjectDialog : DialogFragment() {
                     "endDate" to endDateEdt.text.toString(),
                     "startTime" to startTimeEdt.text.toString(),
                     "endTime" to endTimeEdt.text.toString(),
-                    "projectProgress" to 0,
-                    "totalTask" to 0,
+                    "tasks" to emptyList<String>(),
                     "color" to selectedColor,
                     "users" to memberList,
-                    "taskDetails" to mapOf(
-                        "completed" to 0,
-                        "onGoing" to 0,
-                        "upcoming" to 0
-                    ),
                     "favourite" to emptyList<String>()
                 )
 
