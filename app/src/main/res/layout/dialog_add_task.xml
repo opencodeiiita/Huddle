@@ -60,6 +60,35 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:hint="Select Project"
+                android:textColorHint="@color/text_sec"
+                app:hintTextColor="@color/accent"
+                app:boxCornerRadiusBottomEnd="16dp"
+                app:boxCornerRadiusBottomStart="16dp"
+                app:boxCornerRadiusTopEnd="16dp"
+                app:boxCornerRadiusTopStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+                app:placeholderTextColor="@color/accent">
+
+                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                    android:id="@+id/select_project_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    android:textColor="@color/text_main"
+                    android:textColorHint="@color/text_sec" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -78,6 +107,7 @@
                 app:placeholderTextColor="@color/accent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/add_task_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences"
@@ -111,9 +141,13 @@
                         android:layout_width="20dp"
                         android:layout_height="wrap_content"/>
 
-                    <!-- Add team member views here -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/project_member_rv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"/>
 
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/add_member_task"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:strokeColor="@color/accent"
@@ -229,101 +263,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="40dp"
-                android:text="Board"
-                android:textColor="@color/text_sec"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"
-                android:layout_marginTop="16dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="wrap_content"/>
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/chipGroup"
-                        android:layout_height="wrap_content"
-                        android:layout_width="match_parent"
-                        app:singleLine="true"
-                        app:singleSelection="true"
-                        app:selectionRequired="true"
-                        app:chipSpacingHorizontal="14dp">
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:chipEndPadding="20dp"
-                            app:chipStrokeColor="@color/stroke"
-                            app:chipCornerRadius="12dp"
-                            android:textSize="16sp"
-                            app:chipStartPadding="20dp"
-                            android:checkable="true"
-                            android:text="Urgent"
-                            android:checked="true"
-                            style="@style/OutlinedChip" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:chipEndPadding="20dp"
-                            app:chipStrokeColor="@color/stroke"
-                            app:chipCornerRadius="12dp"
-                            android:textSize="16sp"
-                            android:checkable="true"
-                            app:chipStartPadding="20dp"
-                            android:text="Running"
-                            style="@style/OutlinedChip" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:chipEndPadding="20dp"
-                            app:chipStrokeColor="@color/stroke"
-                            app:chipCornerRadius="12dp"
-                            android:checkable="true"
-                            android:textSize="16sp"
-                            app:chipStartPadding="20dp"
-                            android:text="Ongoing"
-                            style="@style/OutlinedChip" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:chipEndPadding="20dp"
-                            app:chipStrokeColor="@color/stroke"
-                            app:chipCornerRadius="12dp"
-                            android:checkable="true"
-                            android:textSize="16sp"
-                            app:chipStartPadding="20dp"
-                            android:text="Low Priority"
-                            style="@style/OutlinedChip" />
-
-                    </com.google.android.material.chip.ChipGroup>
-
-                    <Space
-                        android:layout_width="20dp"
-                        android:layout_height="match_parent"/>
-
-                </LinearLayout>
-
-            </HorizontalScrollView>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/save_task_btn"

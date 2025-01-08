@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         taskRecyclerView.layoutManager = object : LinearLayoutManager(view.context) {
             override fun canScrollVertically() = false
         }
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(taskList, 0)
         taskRecyclerView.adapter = taskAdapter
 
         projectRecyclerView = view.findViewById(R.id.home_project_rv)
@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
 
         val db = FirebaseFirestore.getInstance()
 
-        db.collection("myTask")
+        db.collection("Task")
             .addSnapshotListener { snapshots, error ->
                 if (error != null) {
                     return@addSnapshotListener
@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
                     taskList.clear()
                     for (document in snapshots) {
                         val task = document.toObject(Task::class.java)
-                        if(task.users.contains(user)) taskList.add(task)
+                        if(task.users.contains(user) && task.status == 1) taskList.add(task)
                     }
 
                     Handler(Looper.getMainLooper()).postDelayed({

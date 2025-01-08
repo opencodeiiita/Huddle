@@ -3,8 +3,11 @@ package com.example.huddle.adapters
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.huddle.R
 import com.example.huddle.activities.ProjectStatusActivity
 import com.example.huddle.data.Project
+import com.example.huddle.data.Task
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.firebase.Firebase
@@ -92,22 +96,44 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
             }
         }
 
-        if (project.totalTask == 0) {
-            holder.projectProgressPi.visibility = View.GONE
-            holder.projectProgressTv.text = "No Tasks"
-        } else {
-            holder.projectProgressTv.text = "${project.projectProgress}/${project.totalTask}"
-            val final = (project.projectProgress.toFloat() / project.totalTask.toFloat()) * 100.0
-            holder.projectProgressPi.progress = final.toInt()
-        }
+        var completedTask = 0;
+
+        Firebase.firestore.collection("Task")
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+
+                if (snapshots != null) {
+                    for (document in snapshots) {
+                        val task = document.toObject(Task::class.java)
+                        if (task.projectId == project.projectId) {
+                            if (task.status == 2) completedTask++
+                        }
+                    }
+
+                    if (project.tasks.isEmpty()) {
+                        holder.projectProgressPi.visibility = GONE
+                        holder.projectProgressTv.text = "No Tasks"
+                    } else {
+                        holder.projectProgressTv.text = "$completedTask/${project.tasks.size}"
+                        if (project.tasks.isNotEmpty()) {
+                            val progress = ((completedTask.toDouble() / project.tasks.size) * 100).toInt().coerceIn(0, 100)
+                            holder.projectProgressPi.progress = progress
+                        } else {
+                            holder.projectProgressPi.progress = 0
+                        }
+
+                    }
+                }
+            }
+
         holder.projectNameTv.text = project.projectName
         holder.projectDescTv.text = project.projectDesc
 
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, ProjectStatusActivity::class.java)
-            intent.putExtra("completed", project.taskDetails["completed"])
-            intent.putExtra("upcoming", project.taskDetails["upcoming"])
-            intent.putExtra("onGoing", project.taskDetails["onGoing"])
+            intent.putExtra("id", project.projectId)
             holder.itemView.context.startActivity(intent)
         }
     }

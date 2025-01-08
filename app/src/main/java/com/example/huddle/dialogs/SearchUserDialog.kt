@@ -18,8 +18,6 @@ import com.example.huddle.data.User
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -67,12 +65,12 @@ class SearchUserDialog : DialogFragment() {
 
         selectedUserIds = arguments?.getStringArrayList(ARG_STRING_LIST)?.toMutableSet() ?: mutableSetOf()
 
+        val memberList = arguments?.getStringArrayList("memberList") ?: emptyList()
+
         userRv = view.findViewById(R.id.user_rv)
         userRv.layoutManager = LinearLayoutManager(requireContext())
         userAdapter = UserAdapter(userList, selectedUserIds)
         userRv.adapter = userAdapter
-
-        val user = Firebase.auth.currentUser
 
         val db = FirebaseFirestore.getInstance()
         db.collection("users")
@@ -85,7 +83,8 @@ class SearchUserDialog : DialogFragment() {
                     userList.clear()
                     for (document in snapshots) {
                         val userData = document.toObject(User::class.java)
-                        if (userData.id != user?.uid) userList.add(userData)
+                        if (memberList.isEmpty()) userList.add(userData)
+                        else { if (memberList.contains(userData.id)) userList.add(userData) }
                     }
                     userAdapter.notifyDataSetChanged()
                 }
@@ -110,7 +109,7 @@ class SearchUserDialog : DialogFragment() {
                                 userList.clear()
                                 for (document in snapshots) {
                                     val userData = document.toObject(User::class.java)
-                                    if (userData.id != user?.uid) userList.add(userData)
+                                    if (memberList?.contains(userData.id) == true) userList.add(userData)
                                 }
                                 userAdapter.notifyDataSetChanged()
                             }
@@ -127,7 +126,7 @@ class SearchUserDialog : DialogFragment() {
                                 userList.clear()
                                 for (document in snapshots) {
                                     val userData = document.toObject(User::class.java)
-                                    if (userData.id != user?.uid) userList.add(userData)
+                                    if (memberList?.contains(userData.id) == true) userList.add(userData)
                                 }
                                 userAdapter.notifyDataSetChanged()
                             }
