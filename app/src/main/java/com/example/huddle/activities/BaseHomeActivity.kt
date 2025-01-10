@@ -1,17 +1,25 @@
 package com.example.huddle.activities
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.icu.util.Calendar
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.ViewGroup
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.RelativeLayout
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.example.huddle.R
@@ -26,13 +34,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.messaging.FirebaseMessaging
 
 class BaseHomeActivity : AppCompatActivity() {
     private lateinit var currentFragment: Fragment
     private var previousItemId: Int = 0
 
+    @SuppressLint("NewApi")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,6 +52,39 @@ class BaseHomeActivity : AppCompatActivity() {
 
         val navSp = getSharedPreferences("navigation", MODE_PRIVATE)
         val navItem = navSp.getString("nav_item", "Home")
+
+        val requestPermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+                if (isGranted) {
+                    FirebaseMessaging.getInstance().subscribeToTopic("all_users")
+                } else {
+                    Log.v("Tag", "Not Subscribed.")
+                }
+            }
+
+        fun askForNotificationPermission() {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                when {
+                    ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.POST_NOTIFICATIONS
+                    ) == PackageManager.PERMISSION_GRANTED -> {
+                    }
+
+                    shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+
+                    else -> {
+                        requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                    }
+                }
+            }
+        }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            askForNotificationPermission()
+        }, 2000)
 
         val window = window
         if (isNightMode) {
@@ -140,6 +182,18 @@ class BaseHomeActivity : AppCompatActivity() {
         closeButton.setOnClickListener {
             dialog.dismiss()
         }
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            FirebaseMessaging.getInstance().subscribeToTopic("all")
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val token = task.result
+
+                    Firebase.firestore.collection("users").document(Firebase.auth.currentUser?.uid.toString()).update("token", token)
+                }
+            }
+        }, 2000)
 
         dialog.findViewById<RelativeLayout?>(R.id.relativeLayoutCreateTask).setOnClickListener {
             val addTaskDialog: DialogFragment = AddTaskDialog()

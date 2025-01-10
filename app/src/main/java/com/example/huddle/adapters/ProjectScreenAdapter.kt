@@ -96,7 +96,7 @@ class ProjectScreenAdapter(private val projectList: List<Project>) : RecyclerVie
             }
         }
 
-        var completedTask = 0;
+        var completedTask = 0
 
         Firebase.firestore.collection("Task")
             .addSnapshotListener { snapshots, error ->

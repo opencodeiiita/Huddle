@@ -117,7 +117,7 @@ class SignUpFragment : Fragment() {
                             userDocument.set(userMap)
                                 .addOnCompleteListener { task ->
                                     if (task.isSuccessful) {
-                                        startActivity(Intent(activity, BaseHomeActivity::class.java))
+                                        startActivity(Intent(activity, OnBoardingActivity::class.java))
                                         activity?.finish()
                                         progressDialog.dismiss()
                                     } else {
