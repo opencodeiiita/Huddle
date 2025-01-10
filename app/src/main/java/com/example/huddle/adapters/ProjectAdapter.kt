@@ -5,6 +5,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.INVISIBLE
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.compose.ui.unit.dp
@@ -14,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.huddle.R
 import com.example.huddle.activities.ProjectStatusActivity
 import com.example.huddle.data.Project
+import com.example.huddle.data.Task
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.firebase.Firebase
+import com.google.firebase.firestore.firestore
 import kotlin.math.min
 
 class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adapter<ProjectAdapter.ProjectViewHolder>() {
@@ -47,6 +52,41 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
 
         val memberList = mutableListOf<String>()
         val memberAdapter = ProjectMemberAdapter(memberList)
+
+        var completedTask = 0;
+
+        Firebase.firestore.collection("Task")
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+
+                if (snapshots != null) {
+                    for (document in snapshots) {
+                        val task = document.toObject(Task::class.java)
+                        if (task.projectId == project.projectId) {
+                            if (task.status == 2) completedTask++
+                        }
+                    }
+
+                    if (project.tasks.isEmpty()) {
+                        holder.projectProgressPi.visibility = GONE
+                        holder.projectProgressTv.text = "No Tasks"
+                        holder.projectProgressParent.text = "He"
+                        holder.projectProgressParent.visibility = INVISIBLE
+                        holder.projectProgressPi.visibility = GONE
+                    } else {
+                        holder.projectProgressTv.text = "$completedTask/${project.tasks.size}"
+                        if (project.tasks.isNotEmpty()) {
+                            val progress = ((completedTask.toDouble() / project.tasks.size) * 100).toInt().coerceIn(0, 100)
+                            holder.projectProgressPi.progress = progress
+                        } else {
+                            holder.projectProgressPi.progress = 0
+                        }
+
+                    }
+                }
+            }
 
         holder.projectMemberRv.adapter = memberAdapter
         val memberCount = min(project.users.size, 3)
@@ -82,16 +122,6 @@ class ProjectAdapter(private val projectList: List<Project>) : RecyclerView.Adap
             holder.projectProgressPi.setIndicatorColor(Color.WHITE)
         }
 
-        if (project.tasks.isEmpty()) {
-            holder.projectProgressPi.visibility = View.GONE
-            holder.projectProgressTv.text = "No Tasks"
-            holder.projectProgressParent.text = "Coasts"
-            holder.projectProgressParent.visibility = View.INVISIBLE
-        } else {
-            holder.projectProgressTv.text = "${project.tasks.size} Tasks"
-            val final = 1 * 100.0
-            holder.projectProgressPi.progress = final.toInt()
-        }
         holder.projectNameTv.text = project.projectName
         holder.projectDescTv.text = project.projectDesc
     }

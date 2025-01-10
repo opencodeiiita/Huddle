@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:name=".Application"
         android:allowBackup="true"
@@ -45,6 +47,18 @@
             android:name=".activities.BaseHomeActivity"
             android:exported="true" />
         <activity android:name=".activities.SettingsActivity" />
+        <service
+            android:name=".activities.notifications.FirebaseCloudMessaging"
+            android:exported="false">
+            <intent-filter>
+                <action
+                    android:name="com.google.firebase.MESSAGING_EVENT">
+                </action>
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification_huddle" />
     </application>
 
 </manifest>

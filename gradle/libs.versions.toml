@@ -29,6 +29,7 @@ mpandroidchartVersion = "v3.1.0"
 playServicesAuth = "21.3.0"
 renderscriptApi = "1.0.0"
 shimmer = "0.5.0"
+firebaseMessaging = "24.1.0"
 
 [libraries]
 androidplot-core = { module = "com.androidplot:androidplot-core", version.ref = "androidplotCore" }
@@ -66,6 +67,7 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version
 philjay-mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version.ref = "mpandroidchartVersion" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
