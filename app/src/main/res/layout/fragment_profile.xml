@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:backgroundTint="@android:color/transparent"
-                    android:text="Sign Out"
+                    android:text="Edit Profile"
                     app:strokeColor="@color/accent"
                     app:strokeWidth="1dp"
                     app:cornerRadius="12dp"
@@ -201,33 +201,6 @@
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:background="@drawable/outlined_search_box"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="4dp"
-                        android:text="Join a Team"
-                        android:textColor="@color/text_main"
-                        android:textSize="16sp" />
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        app:tint="@color/text_main"
-                        android:rotation="180"
-                        android:src="@drawable/baseline_arrow_back_ios_new_24" />
-                </RelativeLayout>
-
-                <RelativeLayout
 
                 android:id="@+id/settings_layout"
                 android:layout_width="match_parent"
@@ -261,7 +234,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginBottom="20dp"
                 android:background="@drawable/outlined_search_box"
                 android:padding="20dp">
 
@@ -283,6 +255,35 @@
                     android:rotation="180"
                     android:src="@drawable/baseline_arrow_back_ios_new_24" />
             </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/sign_out_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/outlined_search_box"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="4dp"
+                        android:text="Sign out from Account"
+                        android:textColor="@color/text_main"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        app:tint="@color/text_main"
+                        android:rotation="180"
+                        android:src="@drawable/baseline_arrow_back_ios_new_24" />
+                </RelativeLayout>
 
             </LinearLayout>
 
