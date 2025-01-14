@@ -1,6 +1,7 @@
 package com.example.huddle.fragments
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -15,11 +16,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.huddle.R
+import com.example.huddle.activities.CalendarActivity
 import com.example.huddle.adapters.ProjectAdapter
 import com.example.huddle.adapters.TaskAdapter
 import com.example.huddle.data.Project
 import com.example.huddle.data.Task
 import com.facebook.shimmer.ShimmerFrameLayout
+import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -59,6 +62,10 @@ class HomeFragment : Fragment() {
         taskShimmerLayout = view.findViewById(R.id.task_shimmer_layout)
         taskShimmerLayout.startShimmer()
         val noResultsTask = view.findViewById<TextView>(R.id.no_results_task)
+
+        view.findViewById<MaterialCardView>(R.id.fragment_home_menu).setOnClickListener {
+            startActivity(Intent(view.context, CalendarActivity::class.java))
+        }
 
         projectShimmerLayout = view.findViewById(R.id.project_shimmer_layout)
         projectShimmerLayout.startShimmer()

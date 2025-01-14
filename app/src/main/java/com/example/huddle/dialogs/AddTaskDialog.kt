@@ -64,70 +64,9 @@ class AddTaskDialog : DialogFragment() {
 
         val selectProjectEdt = view.findViewById<MaterialAutoCompleteTextView>(R.id.select_project_edt)
         var selectedProjectId = arguments?.getString("selectedProjectId")
-
-        val addMemberBtn = view.findViewById<MaterialCardView>(R.id.add_member_task)
-
-        FirebaseFirestore.getInstance().collection("Project")
-            .get()
-            .addOnSuccessListener { documents ->
-                for (document in documents) {
-                    val option = document.getString("projectName")
-                    val documentId = document.id
-                    if(!dropdownOptions.contains(Pair(option, documentId))) option?.let { dropdownOptions.add(Pair(it, documentId)) }
-                }
-
-                if(selectedProjectId != null) selectProjectEdt.setText(dropdownOptions.find { it.second == selectedProjectId }?.first.toString())
-                else addMemberBtn.isEnabled = false
-
-                val projectNames = dropdownOptions.map { it.first }
-
-                val adapter = ArrayAdapter(
-                    view.context,
-                    R.layout.dropdown_item,
-                    R.id.textViewDropdownItem,
-                    projectNames
-                )
-
-                selectProjectEdt.setAdapter(adapter)
-            }
-            .addOnFailureListener { exception ->
-                Log.e("Firestore", "Error fetching data: ", exception)
-            }
-
         var listF: MutableList<String> = mutableListOf()
 
-        selectProjectEdt.setOnItemClickListener { parent, _, position, _ ->
-            val selectedOption = parent.getItemAtPosition(position).toString()
-            selectedProjectId = dropdownOptions.find { it.first == selectedOption }?.second.toString()
-            addMemberBtn.isEnabled = true
-            Firebase.firestore.collection("Project").document(selectedProjectId!!).get().addOnSuccessListener {
-                listF = it["users"] as MutableList<String>
-            }
-        }
-
-        val nameEdt = view.findViewById<TextInputEditText>(R.id.add_task_name)
-        memberRv = view.findViewById(R.id.project_member_rv)
-        memberRv.isNestedScrollingEnabled = false
-        memberRv.layoutManager =
-            object : LinearLayoutManager(view.context, HORIZONTAL, false) {
-                override fun canScrollVertically() = false
-            }
-
-        memberAdapter = MemberAdapter(memberList)
-        memberRv.adapter = memberAdapter
-
-        addMemberBtn.setOnClickListener {
-            val dialog = SearchUserDialog.newInstance(ArrayList(memberList))
-            val args = Bundle()
-            if(listF.isNotEmpty()) args.putStringArrayList("memberList", ArrayList(listF))
-            dialog.arguments = args
-            dialog.setOnUsersSelectedListener { selectedUserIds ->
-                memberList.clear()
-                memberList.addAll(selectedUserIds)
-                memberAdapter.notifyDataSetChanged()
-            }
-            dialog.show(parentFragmentManager, "UserSelectionDialog")
-        }
+        val addMemberBtn = view.findViewById<MaterialCardView>(R.id.add_member_task)
 
         val dateEdt = view.findViewById<TextInputEditText>(R.id.date_edt)
         dateEdt.setOnClickListener {
@@ -196,6 +135,78 @@ class AddTaskDialog : DialogFragment() {
                 val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
                 endTimeEdt.setText(timeString)
             }
+        }
+
+        FirebaseFirestore.getInstance().collection("Project")
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val option = document.getString("projectName")
+                    val documentId = document.id
+                    if(!dropdownOptions.contains(Pair(option, documentId))) option?.let { dropdownOptions.add(Pair(it, documentId)) }
+                }
+
+                if(selectedProjectId != null) {
+                    selectProjectEdt.setText(dropdownOptions.find { it.second == selectedProjectId }?.first.toString())
+                    Firebase.firestore.collection("Project").document(selectedProjectId!!).get().addOnSuccessListener {
+                        listF = it["users"] as MutableList<String>
+                    }
+                } else {
+                    addMemberBtn.isEnabled = false
+                    dateEdt.isEnabled = false
+                    startTimeEdt.isEnabled = false
+                    endTimeEdt.isEnabled = false
+                }
+
+                val projectNames = dropdownOptions.map { it.first }
+
+                val adapter = ArrayAdapter(
+                    view.context,
+                    R.layout.dropdown_item,
+                    R.id.textViewDropdownItem,
+                    projectNames
+                )
+
+                selectProjectEdt.setAdapter(adapter)
+            }
+            .addOnFailureListener { exception ->
+                Log.e("FireStore", "Error fetching data: ", exception)
+            }
+
+        selectProjectEdt.setOnItemClickListener { parent, _, position, _ ->
+            val selectedOption = parent.getItemAtPosition(position).toString()
+            selectedProjectId = dropdownOptions.find { it.first == selectedOption }?.second.toString()
+            addMemberBtn.isEnabled = true
+            dateEdt.isEnabled = true
+            startTimeEdt.isEnabled = true
+            endTimeEdt.isEnabled = true
+            Firebase.firestore.collection("Project").document(selectedProjectId!!).get().addOnSuccessListener {
+                listF = it["users"] as MutableList<String>
+            }
+        }
+
+        val nameEdt = view.findViewById<TextInputEditText>(R.id.add_task_name)
+        memberRv = view.findViewById(R.id.project_member_rv)
+        memberRv.isNestedScrollingEnabled = false
+        memberRv.layoutManager =
+            object : LinearLayoutManager(view.context, HORIZONTAL, false) {
+                override fun canScrollVertically() = false
+            }
+
+        memberAdapter = MemberAdapter(memberList)
+        memberRv.adapter = memberAdapter
+
+        addMemberBtn.setOnClickListener {
+            val dialog = SearchUserDialog.newInstance(ArrayList(memberList))
+            val args = Bundle()
+            if(listF.isNotEmpty()) args.putStringArrayList("memberList", ArrayList(listF))
+            dialog.arguments = args
+            dialog.setOnUsersSelectedListener { selectedUserIds ->
+                memberList.clear()
+                memberList.addAll(selectedUserIds)
+                memberAdapter.notifyDataSetChanged()
+            }
+            dialog.show(parentFragmentManager, "UserSelectionDialog")
         }
 
         view.findViewById<MaterialButton>(R.id.save_task_btn).setOnClickListener {

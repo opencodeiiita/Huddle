@@ -24,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         val isNightMode = sharedPreferences.getBoolean("isNightMode", false)
         setThemeMode(isNightMode)
 
+        val navSp = getSharedPreferences("navigation", MODE_PRIVATE)
+        navSp.edit().putString("nav_item", "Home").apply()
+
         val currentUser = FirebaseAuth.getInstance().currentUser
         if (currentUser != null) startActivity(Intent(this, BaseHomeActivity::class.java))
         else startActivity(Intent(this, LoginActivity::class.java))

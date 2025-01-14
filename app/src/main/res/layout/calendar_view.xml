@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+
+        <ImageButton
+            android:id="@+id/previousButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            app:tint="@color/text_main"
+            android:background="@color/background"
+            android:src="@drawable/baseline_chevron_left_24" />
+
+        <TextView
+            android:id="@+id/monthYearTV"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/text_main"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/nextButton"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@color/background"
+            app:tint="@color/text_main"
+            android:src="@drawable/baseline_chevron_right_24" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="S" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="M" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="T" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="W" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="T" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="F" />
+
+        <TextView
+            style="@style/CalendarHeaderText"
+            android:text="S" />
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/daysGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="7"
+        android:stretchMode="columnWidth" />
+
+</LinearLayout>
