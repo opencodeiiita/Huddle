@@ -1,6 +1,12 @@
 # Huddle App
 **To create a one-stop app for all the management tasks.**</p>
 
+## 🏆Our Top Contributors
+
+<a href="https://github.com/opencodeiiita/Huddle/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo=opencodeiiita/Huddle"/>
+</a>
+
 
 ## 🚀What issue does this App address?
 This app would be a one-stop solution for all management tasks. The app will include a comprehensive space where teams can discuss their ideas, display the current running projects of different wings for better collaboration.
