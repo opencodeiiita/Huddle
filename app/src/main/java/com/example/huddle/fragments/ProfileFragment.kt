@@ -70,10 +70,10 @@ class ProfileFragment : Fragment() {
                     taskComplete = 0
                     for (document in snapshots) {
                         val task = document.toObject(Task::class.java)
-                        if(task.users.contains(user?.uid) && task.status == 2) {
+                        if(task.users.contains(user?.uid) && task.status == 1) {
                             taskOnGoing++
                         }
-                        if(task.users.contains(user?.uid) && task.status == 1) {
+                        if(task.users.contains(user?.uid) && task.status == 2) {
                             taskComplete++
                         }
                     }
