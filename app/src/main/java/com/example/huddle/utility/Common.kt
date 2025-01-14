@@ -1,5 +1,10 @@
 package com.example.huddle.utility
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.util.Base64
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -17,4 +22,9 @@ fun getTimeAgo(timeInMillis: Long): String {
             "Last seen on ${dateFormat.format(timeInMillis)}"
         }
     }
+}
+
+fun decodeBase64ToBitmap(base64Image: String): Bitmap {
+    val decodedBytes = Base64.decode(base64Image, Base64.DEFAULT)
+    return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
 }

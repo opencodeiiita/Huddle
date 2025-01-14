@@ -60,9 +60,10 @@
 
         <ImageView
             android:id="@+id/image_chat_iv"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:src="@drawable/camera_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:rotation="180"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

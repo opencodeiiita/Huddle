@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.activities.ChatActivity
 import com.example.huddle.data.User
+import com.example.huddle.utility.decodeBase64ToBitmap
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
@@ -40,10 +41,17 @@ class AddChatAdapter(private val userList: List<User>, private val fragment: Dia
         val user = userList[position]
         holder.userNameTv.text = user.name
         holder.userEmailTv.text = user.email
-        if (user.profile.isNotEmpty() && user.profile != "null") {
+        if (user.profile.isNotEmpty() && user.profile != "null" && user.profile != "1") {
             Glide.with(holder.itemView.context)
                 .load(user.profile)
                 .into(holder.profileImage)
+        } else if (user.profile == "1") {
+            Firebase.firestore.collection("users").document(user.id).addSnapshotListener { value, error ->
+                val profile_64 = value?.getString("profile_64")
+                if (profile_64 != null) {
+                    holder.profileImage.setImageBitmap(profile_64.let { decodeBase64ToBitmap(it) })
+                }
+            }
         }
         val currentUser = Firebase.auth.currentUser?.uid
 
