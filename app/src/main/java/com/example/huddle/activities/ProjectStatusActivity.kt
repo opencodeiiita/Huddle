@@ -4,25 +4,18 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.view.View
-import android.view.View.GONE
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.huddle.R
 import com.example.huddle.data.Task
-import com.example.huddle.data.User
 import com.example.huddle.dialogs.AddTaskDialog
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
-import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
 
 class ProjectStatusActivity : AppCompatActivity() {
@@ -60,9 +53,9 @@ class ProjectStatusActivity : AppCompatActivity() {
         val progress2 = findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.progressCircle2)
         val progress3 = findViewById<com.google.android.material.progressindicator.CircularProgressIndicator>(R.id.progressCircle3)
 
-        var completed = 0
-        var onGoing = 0
-        var upcoming = 0
+        var completed: Int
+        var onGoing: Int
+        var upcoming: Int
 
         val id = intent.getStringExtra("id")
 

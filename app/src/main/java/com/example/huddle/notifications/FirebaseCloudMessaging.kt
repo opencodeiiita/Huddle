@@ -1,4 +1,4 @@
-package com.example.huddle.activities.notifications
+package com.example.huddle.notifications
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

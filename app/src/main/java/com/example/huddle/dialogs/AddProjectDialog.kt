@@ -110,50 +110,6 @@ class AddProjectDialog : DialogFragment() {
         val nameEdt = view.findViewById<TextInputEditText>(R.id.add_project_name)
         val descEdt = view.findViewById<TextInputEditText>(R.id.add_project_desc)
 
-        val startTimeEdt = view.findViewById<TextInputEditText>(R.id.start_time_edt)
-        startTimeEdt.setOnClickListener {
-            val dialogs = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setTitleText("Select Time")
-                .build()
-            dialogs.show(requireActivity().supportFragmentManager, "tag")
-            dialogs.addOnPositiveButtonClickListener {
-                val selectedHour = dialogs.hour
-                val selectedMinute = dialogs.minute
-                val amPm = if (selectedHour >= 12) {
-                    "PM"
-                } else {
-                    "AM"
-                }
-
-                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
-                val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
-                startTimeEdt.setText(timeString)
-            }
-        }
-
-        val endTimeEdt = view.findViewById<TextInputEditText>(R.id.end_time_edt)
-        endTimeEdt.setOnClickListener {
-            val dialogs = MaterialTimePicker.Builder()
-                .setTimeFormat(TimeFormat.CLOCK_12H)
-                .setTitleText("Select Time")
-                .build()
-            dialogs.show(requireActivity().supportFragmentManager, "tag")
-            dialogs.addOnPositiveButtonClickListener {
-                val selectedHour = dialogs.hour
-                val selectedMinute = dialogs.minute
-                val amPm = if (selectedHour >= 12) {
-                    "PM"
-                } else {
-                    "AM"
-                }
-
-                val hourIn12HrFormat = if (selectedHour > 12) selectedHour - 12 else if (selectedHour == 0) 12 else selectedHour
-                val timeString = String.format("%02d:%02d %s", hourIn12HrFormat, selectedMinute, amPm)
-                endTimeEdt.setText(timeString)
-            }
-        }
-
         val startDateEdt = view.findViewById<TextInputEditText>(R.id.start_date_edt)
         startDateEdt.setOnClickListener {
             val constraintsBuilder = CalendarConstraints.Builder()
@@ -211,8 +167,7 @@ class AddProjectDialog : DialogFragment() {
 
         view.findViewById<MaterialButton>(R.id.save_project_btn).setOnClickListener {
             if(!(nameEdt.text.toString().isEmpty() || descEdt.text.toString().isEmpty() || startDateEdt.text.toString().isEmpty()
-                || endDateEdt.text.toString().isEmpty() || startTimeEdt.text.toString().isEmpty()
-                || endTimeEdt.text.toString().isEmpty() )) {
+                || endDateEdt.text.toString().isEmpty())) {
                 val firestore = FirebaseFirestore.getInstance()
                 val userDocument = firestore.collection("Project").document()
 
@@ -222,8 +177,6 @@ class AddProjectDialog : DialogFragment() {
                     "projectName" to nameEdt.text.toString(),
                     "startDate" to startDateEdt.text.toString(),
                     "endDate" to endDateEdt.text.toString(),
-                    "startTime" to startTimeEdt.text.toString(),
-                    "endTime" to endTimeEdt.text.toString(),
                     "tasks" to emptyList<String>(),
                     "color" to selectedColor,
                     "users" to memberList,
