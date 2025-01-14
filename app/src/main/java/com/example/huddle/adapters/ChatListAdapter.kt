@@ -81,8 +81,12 @@ class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter
                         Log.e("ProfileFragment", "Error loading profile picture: ${e.message}")
                     }
                 } else if (profileUrl == "1") {
-                    val profile_64 = Firebase.firestore.collection("users").document(user).get().result.getString("profile_64")
-                    holder.profileImage.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
+                    Firebase.firestore.collection("users").document(user).addSnapshotListener { value, error ->
+                        val profile_64 = value?.getString("profile_64")
+                        if (profile_64 != null) {
+                            holder.profileImage.setImageBitmap(profile_64.let { decodeBase64ToBitmap(it) })
+                        }
+                    }
                 }
             } else {
                 holder.userNameTv.text = "No Data Found"

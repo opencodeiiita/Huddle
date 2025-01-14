@@ -41,8 +41,12 @@ class UserAdapter(private val userList: List<User>,
                 .load(user.profile)
                 .into(holder.profileImage)
         } else if (user.profile == "1") {
-            val profile_64 = Firebase.firestore.collection("users").document(user.id).get().result.getString("profile_64")
-            holder.profileImage.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
+            Firebase.firestore.collection("users").document(user.id).addSnapshotListener { value, error ->
+                val profile_64 = value?.getString("profile_64")
+                if (profile_64 != null) {
+                    holder.profileImage.setImageBitmap(profile_64.let { decodeBase64ToBitmap(it) })
+                }
+            }
         }
 
         if(selectedUserIds.contains(user.id))holder.itemBg.setBackgroundColor(ContextCompat.getColor(holder.itemView.context, R.color.accent_sec))
