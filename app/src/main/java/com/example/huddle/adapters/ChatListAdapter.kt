@@ -11,9 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.activities.ChatActivity
+import com.example.huddle.utility.decodeBase64ToBitmap
 import com.example.huddle.utility.getTimeAgo
 import com.google.android.material.card.MaterialCardView
+import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.firestore
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -69,7 +72,7 @@ class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter
                     holder.userEmailTv.text = lastSeen?.let { getTimeAgo(it) }
                 }
 
-                if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
+                if (!profileUrl.isNullOrEmpty() && profileUrl != "null" && profileUrl != "1") {
                     try {
                         Glide.with(holder.itemView.context)
                             .load(profileUrl)
@@ -77,6 +80,9 @@ class ChatListAdapter(private val userList: List<String>) : RecyclerView.Adapter
                     } catch(e: Exception) {
                         Log.e("ProfileFragment", "Error loading profile picture: ${e.message}")
                     }
+                } else if (profileUrl == "1") {
+                    val profile_64 = Firebase.firestore.collection("users").document(user).get().result.getString("profile_64")
+                    holder.profileImage.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
                 }
             } else {
                 holder.userNameTv.text = "No Data Found"

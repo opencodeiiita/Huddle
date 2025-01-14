@@ -119,6 +119,7 @@
                             android:layout_marginBottom="8dp" />
 
                         <TextView
+                            android:id="@+id/on_going_task"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -156,6 +157,7 @@
                             android:layout_marginBottom="8dp" />
 
                         <TextView
+                            android:id="@+id/complete_task"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="N/A"
@@ -178,6 +180,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
                     android:layout_marginHorizontal="20dp"
+                    android:visibility="gone"
                     android:background="@drawable/outlined_search_box"
                     android:padding="20dp">
 
@@ -205,7 +208,7 @@
                 android:id="@+id/settings_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/outlined_search_box"
                 android:padding="20dp">
@@ -234,6 +237,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginHorizontal="20dp"
+                    android:visibility="gone"
                 android:background="@drawable/outlined_search_box"
                 android:padding="20dp">
 

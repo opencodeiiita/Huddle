@@ -19,8 +19,10 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.activities.LoginActivity
+import com.example.huddle.data.Task
 import com.example.huddle.dialogs.AddTaskDialog
 import com.example.huddle.dialogs.EditProfileDialog
+import com.example.huddle.utility.decodeBase64ToBitmap
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -54,6 +56,33 @@ class ProfileFragment : Fragment() {
             .collection("users")
             .document(user?.uid.toString())
 
+        var taskOnGoing: Int
+        var taskComplete: Int
+
+        Firebase.firestore.collection("Task")
+            .addSnapshotListener { snapshots, error ->
+                if (error != null) {
+                    return@addSnapshotListener
+                }
+
+                if (snapshots != null) {
+                    taskOnGoing = 0
+                    taskComplete = 0
+                    for (document in snapshots) {
+                        val task = document.toObject(Task::class.java)
+                        if(task.users.contains(user?.uid) && task.status == 2) {
+                            taskOnGoing++
+                        }
+                        if(task.users.contains(user?.uid) && task.status == 1) {
+                            taskComplete++
+                        }
+                    }
+
+                    view.findViewById<TextView>(R.id.on_going_task).text = taskOnGoing.toString()
+                    view.findViewById<TextView>(R.id.complete_task).text = taskComplete.toString()
+                }
+            }
+
         val profilePic = view.findViewById<ImageView>(R.id.profile_pic)
 
         profileNameTv.text = "Loading..."
@@ -71,6 +100,8 @@ class ProfileFragment : Fragment() {
                 val email = documentSnapshot.getString("email")
                 val profileUrl = documentSnapshot.getString("profile")
                 val phoneNumber = documentSnapshot.getString("phone")
+                var profile_64 = ""
+                if (profileUrl == "1") profile_64 = documentSnapshot.getString("profile_64")!!
 
                 profileNameTv.text = name ?: "N/A"
                 profileEmailTv.text = email ?: "N/A"
@@ -81,11 +112,12 @@ class ProfileFragment : Fragment() {
                     bundle.putString("name", name)
                     bundle.putString("phone", phoneNumber)
                     bundle.putString("photo", profileUrl)
+                    if (profileUrl == "1") bundle.putString("photo_64", profile_64)
                     addTaskDialog.arguments = bundle
                     addTaskDialog.show(parentFragmentManager, "EditProfileDialog")
                 }
 
-                if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
+                if (!profileUrl.isNullOrEmpty() && profileUrl != "null" && profileUrl != "1") {
                     try {
                         Glide.with(requireContext())
                             .load(profileUrl)
@@ -93,6 +125,9 @@ class ProfileFragment : Fragment() {
                     } catch(e: Exception) {
                         Log.e("ProfileFragment", "Error loading profile picture: ${e.message}")
                     }
+                } else if (profileUrl == "1") {
+                    val profile_64 = documentSnapshot.getString("profile_64")
+                    profilePic.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
                 }
             } else {
                 profileNameTv.text = "No Data Found"

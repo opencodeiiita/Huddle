@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.huddle.R
+import com.example.huddle.utility.decodeBase64ToBitmap
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import de.hdodenhof.circleimageview.CircleImageView
@@ -25,10 +26,13 @@ class MemberAdapter(private val memberList: List<String>) : RecyclerView.Adapter
         val member = memberList[position]
         Firebase.firestore.collection("users").document(member).get().addOnSuccessListener {
             val profile = it.getString("profile")
-            if (!profile.isNullOrEmpty() && profile != "null") {
+            if (!profile.isNullOrEmpty() && profile != "null" && profile != "1") {
                 Glide.with(holder.itemView.context)
                     .load(profile)
                     .into(holder.memberImage)
+            } else if (profile == "1") {
+                val profile_64 = it.getString("profile_64")
+                holder.memberImage.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
             }
         }
     }

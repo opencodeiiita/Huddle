@@ -1,12 +1,16 @@
 
 package com.example.huddle.activities
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.huddle.PolicyActivity
 import com.example.huddle.R
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.materialswitch.MaterialSwitch
@@ -27,6 +31,16 @@ class SettingsActivity : AppCompatActivity() {
             window.decorView.windowInsetsController?.setSystemBarsAppearance(
                 APPEARANCE_LIGHT_STATUS_BARS, APPEARANCE_LIGHT_STATUS_BARS
             )
+        }
+
+        findViewById<RelativeLayout>(R.id.privacy_policy_rv).setOnClickListener {
+            startActivity(Intent(this, PolicyActivity::class.java))
+        }
+
+        findViewById<RelativeLayout>(R.id.github_rv).setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://github.com/opencodeiiita/Huddle")
+            startActivity(intent)
         }
 
         findViewById<MaterialCardView>(R.id.fragment_settings_back).setOnClickListener {

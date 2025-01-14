@@ -54,6 +54,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="20dp"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/background"
             app:cardCornerRadius="20dp"
             app:strokeColor="@color/stroke_light"

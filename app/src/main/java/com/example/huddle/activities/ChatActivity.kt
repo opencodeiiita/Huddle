@@ -24,6 +24,7 @@ import com.example.huddle.R
 import com.example.huddle.adapters.ChatAdapter
 import com.example.huddle.data.Chat
 import com.example.huddle.data.Task
+import com.example.huddle.utility.decodeBase64ToBitmap
 import com.example.huddle.utility.getTimeAgo
 import com.google.android.material.card.MaterialCardView
 import com.google.firebase.Firebase
@@ -67,7 +68,7 @@ class ChatActivity : AppCompatActivity() {
                 profileNameTv.text = name ?: "N/A"
                 profileTimeTv.text = if(lastSeen == 0.toLong()) "Online" else lastSeen?.let { getTimeAgo(it) } ?: "N/A"
 
-                if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
+                if (!profileUrl.isNullOrEmpty() && profileUrl != "null" && profileUrl != "1") {
                     try {
                         Glide.with(this)
                             .load(profileUrl)
@@ -75,6 +76,9 @@ class ChatActivity : AppCompatActivity() {
                     } catch(e: Exception) {
                         Log.e("ProfileFragment", "Error loading profile picture: ${e.message}")
                     }
+                } else if (profileUrl == "1") {
+                    val profile_64 = documentSnapshot.getString("profile_64")
+                    profilePic.setImageBitmap(profile_64?.let { decodeBase64ToBitmap(it) })
                 }
             } else {
                 profileNameTv.text = "No Data Found"

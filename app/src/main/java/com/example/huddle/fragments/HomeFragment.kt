@@ -4,8 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -103,18 +101,16 @@ class HomeFragment : Fragment() {
                         if(task.users.contains(user) && task.status == 1) taskList.add(task)
                     }
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        taskShimmerLayout.stopShimmer()
-                        taskShimmerLayout.visibility = GONE
-                        taskAdapter.notifyDataSetChanged()
-                        taskRecyclerView.visibility = View.VISIBLE
+                    taskShimmerLayout.stopShimmer()
+                    taskShimmerLayout.visibility = GONE
+                    taskAdapter.notifyDataSetChanged()
+                    taskRecyclerView.visibility = View.VISIBLE
 
-                        if (taskList.isEmpty()) {
-                            noResultsTask.visibility = View.VISIBLE
-                        } else {
-                            noResultsTask.visibility = GONE
-                        }
-                    }, 1000)
+                    if (taskList.isEmpty()) {
+                        noResultsTask.visibility = View.VISIBLE
+                    } else {
+                        noResultsTask.visibility = GONE
+                    }
                 }
             }
 
@@ -131,18 +127,16 @@ class HomeFragment : Fragment() {
                         if(task.users.contains(user)) projectList.add(task)
                     }
 
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        projectShimmerLayout.stopShimmer()
-                        projectShimmerLayout.visibility = GONE
-                        projectAdapter.notifyDataSetChanged()
-                        projectRecyclerView.visibility = View.VISIBLE
+                    projectShimmerLayout.stopShimmer()
+                    projectShimmerLayout.visibility = GONE
+                    projectAdapter.notifyDataSetChanged()
+                    projectRecyclerView.visibility = View.VISIBLE
 
-                        if (projectList.isEmpty()) {
-                            noResultsProject.visibility = View.VISIBLE
-                        } else {
-                            noResultsProject.visibility = GONE
-                        }
-                    }, 1000)
+                    if (projectList.isEmpty()) {
+                        noResultsProject.visibility = View.VISIBLE
+                    } else {
+                        noResultsProject.visibility = GONE
+                    }
                 }
             }
     }
