@@ -14,14 +14,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity.MODE_PRIVATE
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.huddle.R
 import com.example.huddle.activities.LoginActivity
+import com.example.huddle.dialogs.AddTaskDialog
+import com.example.huddle.dialogs.EditProfileDialog
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.card.MaterialCardView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -65,9 +70,20 @@ class ProfileFragment : Fragment() {
                 val name = documentSnapshot.getString("name")
                 val email = documentSnapshot.getString("email")
                 val profileUrl = documentSnapshot.getString("profile")
+                val phoneNumber = documentSnapshot.getString("phone")
 
                 profileNameTv.text = name ?: "N/A"
                 profileEmailTv.text = email ?: "N/A"
+
+                view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {
+                    val addTaskDialog: DialogFragment = EditProfileDialog()
+                    val bundle = Bundle()
+                    bundle.putString("name", name)
+                    bundle.putString("phone", phoneNumber)
+                    bundle.putString("photo", profileUrl)
+                    addTaskDialog.arguments = bundle
+                    addTaskDialog.show(parentFragmentManager, "EditProfileDialog")
+                }
 
                 if (!profileUrl.isNullOrEmpty() && profileUrl != "null") {
                     try {
@@ -84,31 +100,42 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        //Temporary SIGN OUT Button
-        view.findViewById<MaterialButton>(R.id.profile_edit_btn).setOnClickListener {
-            Firebase.firestore.collection("users").document(user?.uid.toString()).update("lastSeen", System.currentTimeMillis())
-            Firebase.auth.signOut()
+        view.findViewById<RelativeLayout>(R.id.sign_out_rl).setOnClickListener {
+            val passDialog = MaterialAlertDialogBuilder(view.context)
+                .setTitle("Sign out")
+                .setMessage("Do you want to sign out your account from the app?")
+                .setPositiveButton("OK") { dialog, _ ->
+                    Firebase.firestore.collection("users").document(user?.uid.toString()).update("lastSeen", System.currentTimeMillis())
+                    Firebase.auth.signOut()
 
-            if(Firebase.auth.currentUser?.providerId.equals("google.com")){
-                val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken(getString(R.string.default_web_client_id))
-                    .requestEmail()
-                    .build()
+                    if(Firebase.auth.currentUser?.providerId.equals("google.com")){
+                        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                            .requestIdToken(getString(R.string.default_web_client_id))
+                            .requestEmail()
+                            .build()
 
-                googleSignInClient =
-                    activity?.baseContext?.let { GoogleSignIn.getClient(it, gso) }!!
+                        googleSignInClient =
+                            activity?.baseContext?.let { GoogleSignIn.getClient(it, gso) }!!
 
-                googleSignInClient.signOut()
-                googleSignInClient.revokeAccess()
-            }
+                        googleSignInClient.signOut()
+                        googleSignInClient.revokeAccess()
+                    }
 
-            val navSp = activity?.getSharedPreferences("navigation", MODE_PRIVATE)
-            val editor = navSp?.edit()
-            editor?.putString("nav_item", "Home")
-            editor?.apply()
+                    val navSp = activity?.getSharedPreferences("navigation", MODE_PRIVATE)
+                    val editor = navSp?.edit()
+                    editor?.putString("nav_item", "Home")
+                    editor?.apply()
+                    dialog.dismiss()
 
-            activity?.finish()
-            startActivity(Intent(context, LoginActivity::class.java))
+                    activity?.finish()
+                    startActivity(Intent(context, LoginActivity::class.java))
+                }
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .create()
+
+            passDialog.show()
         }
 
         view.findViewById<RelativeLayout>(R.id.settings_layout).setOnClickListener {

@@ -30,6 +30,8 @@ playServicesAuth = "21.3.0"
 renderscriptApi = "1.0.0"
 shimmer = "0.5.0"
 firebaseMessaging = "24.1.0"
+firebaseCrashlyticsBuildtools = "3.0.2"
+firebaseStorage = "21.0.1"
 
 [libraries]
 androidplot-core = { module = "com.androidplot:androidplot-core", version.ref = "androidplotCore" }
@@ -68,6 +70,8 @@ philjay-mpandroidchart = { module = "com.github.PhilJay:MPAndroidChart", version
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "firebase-crashlytics-buildtools", version.ref = "firebaseCrashlyticsBuildtools" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
